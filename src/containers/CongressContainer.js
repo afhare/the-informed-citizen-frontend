@@ -24,7 +24,7 @@ class CongressContainer extends React.Component {
                     <div className='congress-representatives grid-container'>{representatives}</div>
                 <hr width='25%' />
                 <h2>Senate</h2>
-                    <div className='congress-senators grid-container'>{senators}</div>
+                    <div className='congress-senators'>{senators}</div>
                 <hr width='25%' />
             </div>
         )
