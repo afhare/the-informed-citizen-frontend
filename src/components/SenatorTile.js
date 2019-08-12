@@ -16,4 +16,5 @@ class SenatorTile extends React.Component {
     }
 }
 
-export default connect()(SenatorTile)
+// export default connect()(SenatorTile)
+export default SenatorTile

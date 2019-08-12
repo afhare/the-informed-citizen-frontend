@@ -22,4 +22,5 @@ class RepresentativeShow extends React.Component {
     }
 }
 
-export default connect()(RepresentativeShow)
+// export default connect()(RepresentativeShow)
+export default RepresentativeShow
