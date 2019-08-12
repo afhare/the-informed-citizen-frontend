@@ -21,4 +21,5 @@ class SenatorShow extends React.Component {
     }
 }
 
-export default connect()(SenatorShow)
+// export default connect()(SenatorShow)
+export default SenatorShow
