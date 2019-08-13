@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class RepresentativeShow extends React.Component {
     render(){
@@ -10,7 +11,7 @@ class RepresentativeShow extends React.Component {
                 <p>Chamber of Congress:{this.props.representative.chamber}</p>
                 <p>Role: {this.props.representative.role}, {this.props.representative.state.abbreviation}</p>
                 <hr width='35%'/>
-                <p>State: {this.props.representative.state.name}</p>
+                <p>State: </p>  <Link to={`/states/${this.props.representative.state.id}`}> {this.props.representative.state.name} </Link>
                 <p>District: {this.props.representative.district}</p>
                 <p>Twitter Handle: <a href={`https://twitter.com/${this.props.representative.twitter_id}`} target={'_blank'}>@{this.props.representative.twitter_id}</a></p>
                 <p>Facebook: <a href={`https://www.facebook.com/${this.props.representative.facebook_account}`} target={'_blank'}>{this.props.representative.facebook_account}</a></p>
