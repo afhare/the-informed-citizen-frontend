@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 import StateRepTile from './StateConnectedRepresentativeTile'
 import StateSenatorTile from './StateConnectedSenatorTile'
 
+
 class StateShow extends React.Component {
+    componentDidMount(){
+        console.log(this.props)
+    }
 
     display2019Election = () => {
         let electionDates = this.props.showState.twenty_nineteen_election_date

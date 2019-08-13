@@ -7,6 +7,10 @@ import StatesContainer from './containers/StatesContainer'
 import SenatorShow from './components/SenatorShow';
 import RepresentativeShow from './components/RepresentativeShow';
 import StateShow from './components/StateShow'
+import NavBar from './components/NavBar';
+import Home from './components/Home';
+import LoginContainer from './containers/LoginContainer';
+import UserShow from './components/UserShow';
 
 class App extends React.Component { 
 
@@ -15,13 +19,15 @@ class App extends React.Component {
     this.state={
       senators:[],
       representatives:[],
-      unitedStates:[]
+      unitedStates:[],
+      users:[]
     }
   }
   componentDidMount(){
     this.getHouse();
     this.getSenators();
     this.getStates();
+    this.getUsers();
   }
 
   getHouse = () => {
@@ -42,12 +48,23 @@ class App extends React.Component {
         })
   }
 
+  getUsers = () => {
+    fetch('http://localhost:3001/users').then(response => response.json()).then(data => {
+            this.setState({users: data})
+        })
+  }
+
   render(){
     return (
       <BrowserRouter>
+        <NavBar />
         <div className='App'>
           <Switch>
-            <Route exact path='/' render={ routeProps => ( <CongressContainer {...routeProps} senators={this.state.senators} representatives={this.state.representatives}/> )}/>
+            <Route exact path='/' component={Home}/>
+
+            <Route exact path='/login' component={LoginContainer}/>
+
+            <Route exact path='/congress' render={ routeProps => ( <CongressContainer {...routeProps} senators={this.state.senators} representatives={this.state.representatives}/> )}/>
             
             <Route exact path='/states' render={ routeProps => ( <StatesContainer {...routeProps} states={this.state.unitedStates}/> )}/>
             
@@ -81,6 +98,19 @@ class App extends React.Component {
                       return (
                           <div>
                               <SenatorShow senator={senator}/>
+                          </div>
+                      )}
+              } 
+            />
+
+          <Route exact path='/users/:userId' 
+              render={
+                  (route) => {
+                    const id = route.match.params.userId
+                    const user = this.state.users.find(user => user.id == id)
+                      return (
+                          <div>
+                              <UserShow user={user}/>
                           </div>
                       )}
               } 
