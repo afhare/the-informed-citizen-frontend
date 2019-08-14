@@ -1,3 +1,4 @@
+
 export function fetchHouseReps(){
     return function (dispatch){
         dispatch({type: 'START_HOUSE_FETCH'})
@@ -15,5 +16,11 @@ export function fetchSenators(){
             console.log(data)
             dispatch({type: 'FETCH_SENATE_SUCCESS', senators: data})
         })
+    }
+}
+
+export function thunkFetchHouseReps(){
+    return function(dispatch){
+        dispatch({type: 'LOADING'})
     }
 }
