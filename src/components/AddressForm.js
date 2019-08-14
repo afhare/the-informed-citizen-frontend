@@ -17,6 +17,16 @@ class AddressForm extends React.Component {
         console.log('form submitted')
         const addressObj = this.state
         this.props.submitForm(addressObj);
+        this.clearForm();
+    }
+
+    clearForm = () => {
+        this.setState({
+            street_address:'',
+            city:'',
+            state:'',
+            zipcode:''
+        })
     }
 
     handleInputChange = (e) => {
@@ -30,15 +40,16 @@ class AddressForm extends React.Component {
             <form onSubmit={(e) => this.handleSubmit(e)}>
                 <br/>
                 <label>Street Address: </label>
-                    <input type='text' name='street_address' onChange={(e)=> this.handleInputChange(e)}/>
+                    <input type='text' name='street_address' onChange={(e)=> this.handleInputChange(e)} value={this.state.street_address} placeholder='Ex: 123 Main Street'/>
+                    <br />
                 <label>City: </label>
-                    <input type='text' name='city' onChange={(e)=> this.handleInputChange(e)}/>
+                    <input type='text' name='city' onChange={(e)=> this.handleInputChange(e)} value={this.state.city} placeholder='Ex: Binghamton, Kansas City'/>
                     <br />
                 <label>Two-Letter State Abbreviation: </label>
-                    <input type='text' name='state' onChange={(e)=> this.handleInputChange(e)} placeholder='Ex: AL, CA, OH'/>
+                    <input type='text' name='state' onChange={(e)=> this.handleInputChange(e)} value={this.state.state} placeholder='Ex: AL, CA, OH'/>
                     <br />
                 <label>Zip Code: </label>
-                    <input type='text' name='zipcode' onChange={(e)=> this.handleInputChange(e)}/>
+                    <input type='text' name='zipcode' onChange={(e)=> this.handleInputChange(e)} value={this.state.zipcode} placeholder='Ex: 12345, 45678'/>
                 <input type='submit' />
             </form>
         )

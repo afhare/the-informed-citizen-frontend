@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import UserConnectedRepresentativeTile from './UserConnectedRepresentativeTile';
 import UserConnectedSenatorTile from './UserConnectedSenatorTile';
 
 class UserShow extends React.Component {
-    componentDidMount(){
-        console.log(this.props)
-    }
+
     displayPollingPlace = () => {
         // fetch call to google API
         return ( <p>Not there yet!</p>)
@@ -41,7 +39,8 @@ class UserShow extends React.Component {
                         </div>
                     <h4>My Representative: </h4>
                         <div className='user-grid-container'>
-                            {this.displayRepresentative()}
+        { this.props.user.representatives.length > 0 ? this.displayRepresentative() : 
+            <> <p> If you do not see a representative listed below,<br/>a list of all {this.props.user.user_state}'s representatives can be found <Link to={`/states/${this.props.user.state_id}`}>here</Link>.</p></> }
                         </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@ class NavBar extends React.Component {
                 <Link to={'/congress'} className="nav-link"> View Congressional Representatives </Link>  ||  
                 <Link to={'/states'} className="nav-link"> View States </Link>  ||
                 { localStorage.getItem("user") ? this.renderLogout() : <Link to={'/login'} className="nav-link"> Login </Link>}  ||
-                <Link to={'/users/3'} className="nav-link"> Profile Page </Link>  ||
+                <Link to={'/users/5'} className="nav-link"> Profile Page </Link>  ||
                 <Link to={'/address-search'} className="nav-link"> Find My Representatives </Link>
             </nav>
         )
