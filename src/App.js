@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import CongressContainer from './containers/CongressContainer';
 import StatesContainer from './containers/StatesContainer'
@@ -11,6 +11,8 @@ import NavBar from './components/NavBar';
 import Home from './components/Home';
 import LoginContainer from './containers/LoginContainer';
 import UserShow from './components/UserShow';
+import AddressMatchContainer from './containers/AddressMatchContainer';
+import API from './services/api'
 
 class App extends React.Component { 
 
@@ -20,53 +22,33 @@ class App extends React.Component {
       senators:[],
       representatives:[],
       unitedStates:[],
-      users:[]
+      users:[],
     }
   }
   componentDidMount(){
-    this.getHouse();
-    this.getSenators();
-    this.getStates();
-    this.getUsers();
+    API.getHouse().then(data => {this.setState({representatives: data})})
+    API.getSenators().then(data => {this.setState({senators: data})})
+    API.getStates().then(data => {this.setState({unitedStates: data})})
+    API.getUsers().then(data => {this.setState({users: data})})
   }
 
-  getHouse = () => {
-    fetch('http://localhost:3001/representatives').then(response => response.json()).then(data => {
-            this.setState({representatives: data})
-        })
-  }
-
-  getSenators = () => {
-    fetch('http://localhost:3001/senators').then(response => response.json()).then(data => {
-            this.setState({senators: data})
-        })
-  }
-
-  getStates = () => {
-    fetch('http://localhost:3001/states').then(response => response.json()).then(data => {
-            this.setState({unitedStates: data})
-        })
-  }
-
-  getUsers = () => {
-    fetch('http://localhost:3001/users').then(response => response.json()).then(data => {
-            this.setState({users: data})
-        })
-  }
+  //add a handle logout route to navbar
 
   render(){
     return (
       <BrowserRouter>
-        <NavBar />
+        <NavBar/> 
         <div className='App'>
           <Switch>
             <Route exact path='/' component={Home}/>
 
-            <Route exact path='/login' component={LoginContainer}/>
+            <Route exact path='/login' render={(routeProps) => { return <LoginContainer {...routeProps} />}} />
 
             <Route exact path='/congress' render={ routeProps => ( <CongressContainer {...routeProps} senators={this.state.senators} representatives={this.state.representatives}/> )}/>
             
             <Route exact path='/states' render={ routeProps => ( <StatesContainer {...routeProps} states={this.state.unitedStates}/> )}/>
+            
+            <Route exact path='/address-search' render={ routeProps => (<AddressMatchContainer {...routeProps}/>)}/>
             
             <Route exact path='/states/:stateID' render={
                 (route) => {

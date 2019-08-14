@@ -1,23 +1,42 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LoginForm from '../components/LoginForm';
+import Api from '../services/api'
+
 
 class LoginContainer extends React.Component {
+    
+    constructor(props){
+        super(props)
+        this.state = {
+            username: '',
+            password: ''
+        }
+    }
+    
     componentDidMount(){
         console.log(this.props)
     };
 
-    constructor(props){
-        super(props)
-        this.state={
-        }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
     }
 
     renderLogin = () => {
         return (
-            <div>
-               <LoginForm />
+            <div className='login-form'>
+                <form onSubmit={(e) => this.handleSubmit(e)}>
+                    <h3>Username: </h3> <input type="text" placeholder="Enter username here" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)}/>
+                    <h3>Password: </h3> <input type="password" placeholder="Enter password here" name="password" value={this.state.password} onChange={(e)=> this.handleChange(e)}/>
+                    <br />
+                    <input type='submit'/>
+                </form>
             </div>
         )
     }

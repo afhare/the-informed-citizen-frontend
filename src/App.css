@@ -2,32 +2,48 @@
   text-align: center;
 }
 
+.logo{
+  width: 2%;
+  height: 2%;
+}
+
 .congress-grid-container{
   margin: 2em;
+  margin-left: 8em;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 2em; 
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em; 
+  height: 400px;
+  width: 85%;
+  padding: 0.8em;
+  overflow: scroll;
 }
 
 .state-grid-container{
   margin: 2em;
+  margin-left: 21em;
   display: grid;
+  width: 1000px;
+  height: 500px;
+  overflow:scroll;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2em; 
 }
 
 .user-grid-container{
   margin: 2em;
-  align-items: center;
+  display: grid;
+  grid-gap: 2em;
 }
 
 .grid-item{
   padding: 0.5em;
   border: 3px solid gold;
+  width: 260px;
+  height: 175px;
 }
 
 .user-grid-item{ 
-  margin: 0.75em;
   padding: 0.5em;
   border: 3px solid gold;
 }
@@ -39,7 +55,7 @@
 
 .D:hover{
   background-color: rgba(0, 0, 255, .6);
-  transform: scale(1.2);
+  transform: scale(1.05);
 }
 
 .R{
@@ -49,7 +65,7 @@
 
 .R:hover{
   background-color: rgba(255,0,0, .6);
-  transform: scale(1.2);
+  transform: scale(1.05);
 }
 
 .voter-positive{
