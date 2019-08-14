@@ -4,12 +4,6 @@ import UserMatchedRepresentative from './UserMatchedRepresentative';
 import ReactDOM from 'react-dom';
 
 class AddressDisplay extends React.Component {
-    constructor(props){
-        super(props)
-        this.state={
-            formattedReps: []
-        }
-    }
 
     handleGoogleAPIRequest = () => {
         let street = `${this.props.displayAddress.street_address}`
@@ -25,7 +19,7 @@ class AddressDisplay extends React.Component {
             let myRepresentatives = data.officials.slice(2,5)
             
             let formattedReps = myRepresentatives.map(official => {
-                return {name: official.name, party: official.party, phones: official.phones}
+                return {name: official.name, party: official.party, phones: official.phones, urls: official.urls}
             })
             this.displayRepresentatives(formattedReps)
         })
