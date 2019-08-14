@@ -7,7 +7,7 @@ class Home extends React.Component {
     render(){
         return(
             <div>
-                { congress }
+                <img src={congress} alt='Congress icon' />
                 <h2>Welcome to The Digital Hill</h2>
                 <hr width='10%'/>
                 <p>Congress has the power to remove the president, federal judges, and other federal officers from office. The House of Representatives and Senate have separate roles in this process. The House must first vote to "impeach" the official. Then, a trial is held in the Senate to decide whether the official should be removed from office.  Although two presidents have been impeached by the House of Representatives (Andrew Johnson and Bill Clinton), neither of them was removed following trial in the Senate.</p>
