@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchStates } from '../actions'
 import StateTile from '../components/StateTile';
 import { Search } from 'semantic-ui-react'
 import _ from 'lodash'
 
 class StatesContainer extends React.Component {
     componentDidMount(){
-        console.log(this.props)
+        this.props.fetchStates();
     };
 
     constructor(props){
@@ -50,26 +51,22 @@ class StatesContainer extends React.Component {
         </Switch>
         )
     }
-
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         senators: state.senators,
-    //         representatives: state.representatives,
-    //         loader: state.loader
-    //     }
-    // }
-
-    // const mapDispatchToProps = (dispatch) => {
-    //     return {
-    //         fetchHouseReps: () => {
-    //             dispatch(fetchHouseReps)
-    //         },
-    //         fetchSenators: () => {
-    //             dispatch(fetchSenators)
-    //         }
-    //     }
-    // }
 }
 
-// export default connect()(StatesContainer)
-export default StatesContainer
+    const mapStateToProps = (state) => {
+        return {
+            states: state.states,
+            loader: state.loader
+        }
+    }
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            fetchStates: () => {
+                dispatch(fetchStates())
+            }
+        }
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(StatesContainer)
+// export default StatesContainer

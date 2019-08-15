@@ -1,16 +1,14 @@
+import {START_SENATE_FETCH, FETCH_SENATE_SUCCESS} from '../actions/types'
+
 export default function senators(state=[], action){
     switch (action.type){
-        case 'FETCH_SENATE_SUCCESS':
-            return state.concat([...action.senators])
-        case 'MATCH':
-            console.log('matched rep')
-            // based on the state, find the matching representatives
+        case START_SENATE_FETCH:
             return state
-        case 'COMPARE':
-            console.log('compare these reps')
-            // identify two or more reps to compare
-            return state
+        case FETCH_SENATE_SUCCESS:
+            const newState = [...action.senators]
+            return newState
         default:
             return state
-    }
+        }
 }
+    
