@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchShowState } from '../actions'
 
 class StateTile extends React.Component {
     render(){
@@ -8,10 +9,24 @@ class StateTile extends React.Component {
             <div className={`state-tile grid-item`}>
                 <p>Name: {this.props.state.name}</p>
                 <p>Abbreviation: {this.props.state.abbreviation}</p>
-                <Link to={`/states/${this.props.state.id}`}> View More Details</Link>
+                <Link to={`/states/${this.props.state.id}`} onClick={() => this.props.fetchShowState(this.props.state.id)}> View More Details</Link>
             </div>
         )
     }
 }
 
-export default connect()(StateTile)
+const mapStateToProps = (state) => {
+    return {
+        loader: state.loader
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchShowState: (id) => {
+            dispatch(fetchShowState(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StateTile)

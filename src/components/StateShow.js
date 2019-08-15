@@ -2,12 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux'
 import StateRepTile from './StateConnectedRepresentativeTile'
 import StateSenatorTile from './StateConnectedSenatorTile'
+import { Route, Switch } from 'react-router-dom';
 
 
 class StateShow extends React.Component {
-    componentDidMount(){
-        console.log(this.props)
-    }
 
     display2019Election = () => {
         let electionDates = this.props.showState.twenty_nineteen_election_date
@@ -36,8 +34,8 @@ class StateShow extends React.Component {
     displaySenators = () => {
         return this.props.showState.senators.map(senator => <StateSenatorTile senator={senator}/>)
     }
-    
-    render(){
+
+    renderShowState = () => {
         return(
             <div className='state-card'>
                 <h3>{this.props.showState.name}, {this.props.showState.abbreviation}</h3>
@@ -60,15 +58,35 @@ class StateShow extends React.Component {
                         <h6>Does {this.props.showState.name} allow for online voter registration? </h6> {this.props.showState.online_voter_registration ? <p>Yes.</p> : <p>No.</p>}
                 </div>
                 <div className='congress-representation state-grid-container'>
-                    {this.displayHouseReps()}
-                    {this.displaySenators()}
+                    {this.props.showState.representatives ? this.displayHouseReps() : null}
+                    {this.props.showState.senators ? this.displaySenators() : null}
                 </div>
             </div>
         )
     }
+    
+    render(){
+        return(
+           <Switch>
+               <Route path='/states/:stateID'>
+                    {this.props.loader ? <div>Loading, please wait ...</div> : this.renderShowState()}
+               </Route>
+           </Switch>
+        )
+    }
 }
 
-// export default connect()(StateShow)
-export default StateShow
+
+const mapStateToProps = (state) => {
+    return {
+        loader: state.loader,
+        showState: state.showState
+    }
+}
+
+export default connect(mapStateToProps, null)(StateShow)
+// export default StateShow
+
+
 
 

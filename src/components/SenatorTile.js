@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchShowSenator } from '../actions'
 
 class SenatorTile extends React.Component {
     render(){
@@ -10,11 +11,25 @@ class SenatorTile extends React.Component {
                 <p>Party Affiliation: {this.props.senator.party}</p>
                 <p>State: {this.props.senator.state.name}</p>
                 <p>{this.props.senator.role}</p>
-                <Link to={`/senators/${this.props.senator.id}`}> View More Details</Link>
+                <Link to={`/senators/${this.props.senator.id}`} onClick={() => this.props.fetchShowSenator(this.props.senator.id)}> View More Details</Link>
             </div>
         )
     }
 }
 
-// export default connect()(SenatorTile)
-export default SenatorTile
+const mapStateToProps = (state) => {
+    return {
+        loader: state.loader
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchShowSenator: (id) => {
+            dispatch(fetchShowSenator(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SenatorTile)
+// export default SenatorTile

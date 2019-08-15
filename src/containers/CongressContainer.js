@@ -11,9 +11,8 @@ import _ from 'lodash'
 
 class CongressContainer extends React.Component {
     componentDidMount(){
-        // this.props.fetchHouseReps();
-        // this.props.fetchSenators();
-        console.log(this.props)
+        this.props.fetchHouseReps();
+        this.props.fetchSenators();
     };
 
     constructor(props){
@@ -35,6 +34,7 @@ class CongressContainer extends React.Component {
     }
 
     renderCongress = () => {
+        
         let desiredReps = this.props.representatives.filter(representativeObj => representativeObj.name.includes(this.state.searchTerm))
         let desiredSenators = this.props.senators.filter(senatorObj => senatorObj.name.includes(this.state.searchTerm))
         
@@ -143,29 +143,6 @@ class CongressContainer extends React.Component {
     render(){
         return (
         <Switch>
-            <Route path='/senators/:senatorId' 
-            render={
-                (route) => {
-                    const id = route.match.params.senatorId
-                    const senator = this.props.senators.find(senator => senator.id === id)
-                    return (
-                        <div>
-                            <SenatorShow senator={senator}/>
-                        </div>
-                    )}
-            } 
-            />
-            
-            <Route path='/representatives/:representativeId' render={
-                (route) => {
-                    const id = route.match.params.representativeId
-                    const representative = this.props.representatives.find(rep => rep.id === id)
-                    return (
-                        <div>
-                            <RepresentativeShow representative={representative}/>
-                        </div>
-                    )}
-            } />
             < Route path='/' render={ () => {
                 return(
                     <div>
@@ -177,26 +154,28 @@ class CongressContainer extends React.Component {
         </Switch>
         )
     }
-
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         senators: state.senators,
-    //         representatives: state.representatives,
-    //         loader: state.loader
-    //     }
-    // }
-
-    // const mapDispatchToProps = (dispatch) => {
-    //     return {
-    //         fetchHouseReps: () => {
-    //             dispatch(fetchHouseReps)
-    //         },
-    //         fetchSenators: () => {
-    //             dispatch(fetchSenators)
-    //         }
-    //     }
-    // }
 }
 
-// export default connect()(CongressContainer)
-export default CongressContainer
+    const mapStateToProps = (state) => {
+        return {
+            senators: state.senators,
+            representatives: state.representatives,
+            loader: state.loader
+        }
+    }
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            fetchHouseReps: () => {
+                console.log('fetching house')
+                dispatch(fetchHouseReps())
+            },
+            fetchSenators: () => {
+                console.log('fetching senate')
+                dispatch(fetchSenators())
+            }
+        }
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CongressContainer)
+// export default CongressContainer
