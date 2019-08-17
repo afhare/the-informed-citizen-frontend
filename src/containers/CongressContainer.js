@@ -2,8 +2,6 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchHouseReps, fetchSenators } from '../actions'
-import SenatorShow from '../components/SenatorShow';
-import RepresentativeShow from '../components/RepresentativeShow';
 import RepresentativeTile from '../components/RepresentativeTile';
 import SenatorTile from '../components/SenatorTile';
 import { Search } from 'semantic-ui-react';
@@ -167,15 +165,12 @@ class CongressContainer extends React.Component {
     const mapDispatchToProps = (dispatch) => {
         return {
             fetchHouseReps: () => {
-                console.log('fetching house')
                 dispatch(fetchHouseReps())
             },
             fetchSenators: () => {
-                console.log('fetching senate')
                 dispatch(fetchSenators())
             }
         }
     }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CongressContainer)
-// export default CongressContainer

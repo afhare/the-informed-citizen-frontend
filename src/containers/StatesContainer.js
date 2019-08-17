@@ -69,4 +69,3 @@ class StatesContainer extends React.Component {
     }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatesContainer)
-// export default StatesContainer

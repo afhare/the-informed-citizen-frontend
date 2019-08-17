@@ -56,4 +56,4 @@ class AddressForm extends React.Component {
     }
 }
 
-export default AddressForm
+export default connect()(AddressForm)

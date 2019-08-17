@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link, Route, Switch } from 'react-router-dom'
 import congress from '../congress.svg'
 
 class Home extends React.Component {
@@ -20,5 +19,4 @@ class Home extends React.Component {
     }
 }
 
-// export default connect()(Home)
-export default Home
+export default connect()(Home)

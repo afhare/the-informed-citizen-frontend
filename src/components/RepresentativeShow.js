@@ -36,9 +36,9 @@ const mapStateToProps = (state) => {
 return {
     loader: state.loader,
     representative: state.showHouseRep,
-    displayState: state.showHouseRep.state
+    displayState: state.showHouseRep.state,
+    loggedInUser: state.loggedInUser
 }
 }
 
 export default connect(mapStateToProps, null)(RepresentativeShow)
-// export default RepresentativeShow

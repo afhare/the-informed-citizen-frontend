@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import CongressContainer from './containers/CongressContainer';
 import StatesContainer from './containers/StatesContainer'
@@ -12,27 +12,13 @@ import Home from './components/Home';
 import LoginContainer from './containers/LoginContainer';
 import UserShow from './components/UserShow';
 import AddressMatchContainer from './containers/AddressMatchContainer';
-import API from './services/api'
+import { connect } from 'react-redux'
+import { verifyLogin } from './actions'
 
 class App extends React.Component { 
-
-  constructor(props){
-    super(props);
-    this.state={
-      senators:[],
-      representatives:[],
-      unitedStates:[],
-      users:[],
-    }
+  componentDidMount(){
+    console.log('token', localStorage.getItem('user'), 'user', this.props.loggedInUser)
   }
-  // componentDidMount(){
-  //   API.getHouse().then(data => {this.setState({representatives: data})})
-  //   API.getSenators().then(data => {this.setState({senators: data})})
-  //   API.getStates().then(data => {this.setState({unitedStates: data})})
-  //   API.getUsers().then(data => {this.setState({users: data})})
-  // }
-
-  //add a handle logout route to navbar
 
   render(){
     return (
@@ -56,18 +42,7 @@ class App extends React.Component {
 
             <Route exact path='/address-search' render={ routeProps => (<AddressMatchContainer {...routeProps}/>)}/>
 
-          <Route exact path='/users/:userId' 
-              render={
-                  (route) => {
-                    const id = route.match.params.userId
-                    const user = this.state.users.find(user => user.id == id)
-                      return (
-                          <div>
-                              <UserShow user={user}/>
-                          </div>
-                      )}
-              } 
-            />
+            <Route exact path='/profile' render={ routeProps => (<UserShow {...routeProps} user={this.props.loggedInUser}/>)}/>
           </Switch>
         </div>
       </BrowserRouter>
@@ -76,4 +51,18 @@ class App extends React.Component {
 
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    loggedInUser: state.loggedInUser
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    verifyLogin: (token) => {
+      dispatch(verifyLogin(token))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -5,10 +5,6 @@ import AddressDisplay from '../components/AddressDisplay';
 import AddressForm from '../components/AddressForm';
 
 class AddressMatchContainer extends React.Component {
-    componentDidMount(){
-        console.log(this.props)
-    };
-
     constructor(props){
         super(props)
         this.state={
@@ -64,17 +60,16 @@ class AddressMatchContainer extends React.Component {
         )
     }
 
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         loader: state.loader
-    //     }
-    // }
-
-    // const mapDispatchToProps = (dispatch) => {
-    //     return {
-    //     }
-    // }
 }
+    const mapStateToProps = (state) => {
+        return {
+            loader: state.loader
+        }
+    }
 
-// export default connect()(AddressMatchContainer)
-export default AddressMatchContainer
+    const mapDispatchToProps = (dispatch) => {
+        return {
+        }
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressMatchContainer)

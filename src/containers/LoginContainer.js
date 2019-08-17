@@ -1,7 +1,7 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Api from '../services/api'
+import { login } from '../actions'
 
 
 class LoginContainer extends React.Component {
@@ -10,13 +10,10 @@ class LoginContainer extends React.Component {
         super(props)
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            error: false
         }
     }
-    
-    componentDidMount(){
-        console.log(this.props)
-    };
 
     handleChange = (e) => {
         this.setState({
@@ -25,7 +22,14 @@ class LoginContainer extends React.Component {
     }
 
     handleSubmit = (e) => {
+        let username = this.state.username
+        let password = this.state.password
         e.preventDefault();
+        this.props.login(username, password, this.props.history)
+        this.setState({
+            username: '',
+            password: ''
+        })
     }
 
     renderLogin = () => {
@@ -54,18 +58,21 @@ class LoginContainer extends React.Component {
         </Switch>
         )
     }
-
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         loader: state.loader
-    //     }
-    // }
-
-    // const mapDispatchToProps = (dispatch) => {
-    //     return {
-    //     }
-    // }
 }
 
-// export default connect()(LoginContainer)
-export default LoginContainer
+    const mapStateToProps = (state) => {
+        return {
+            loader: state.loader,
+            loggedInUser: state.loggedInUser
+        }
+    }
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            login: (username, password, history) => {
+                dispatch(login(username, password, history))
+            }
+        }
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

@@ -4,13 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import StateTile from './StateTile'
 
 class SenatorShow extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    componentDidMount(){
-        console.log(this.props)
-    }
-
     renderSenator = () => {
         return(
             <div className='senator-card'>
@@ -43,9 +36,9 @@ const mapStateToProps = (state) => {
     return {
         loader: state.loader,
         senator: state.showSenator,
-        displayState: state.showSenator.state
+        displayState: state.showSenator.state,
+        loggedInUser: state.loggedInUser
     }
 }
 
 export default connect(mapStateToProps, null)(SenatorShow)
-// export default SenatorShow

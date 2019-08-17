@@ -1,9 +1,21 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import UserMatchedRepresentative from './UserMatchedRepresentative';
 import ReactDOM from 'react-dom';
+import { fetchHouseReps, fetchSenators } from '../actions'
 
 class AddressDisplay extends React.Component {
+
+    componentDidMount(){
+        if (this.props.representatives.length === 0) {
+            this.props.fetchHouseReps()
+        } else if (this.props.senators.length === 0) {
+            this.props.fetchSenators()
+        } else if (this.props.representatives.length === 0 && this.props.senators.length === 0){
+            this.props.fetchHouseReps()
+            this.props.fetchSenators()
+        }
+    }
 
     handleGoogleAPIRequest = () => {
         let street = `${this.props.displayAddress.street_address}`
@@ -67,4 +79,24 @@ class AddressDisplay extends React.Component {
     }
 }
 
-export default AddressDisplay
+const mapStateToProps = (state) => {
+    return {
+        user: state.loggedInUser,
+        representatives: state.representatives,
+        senators: state.senators,
+        loader: state.loader
+        }
+    }
+
+const mapDispatchToProps = (dispatch) => {
+        return {
+            fetchHouseReps: () => {
+                dispatch(fetchHouseReps())
+            },
+            fetchSenators: () => {
+                dispatch(fetchSenators())
+            }
+        }
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressDisplay)
