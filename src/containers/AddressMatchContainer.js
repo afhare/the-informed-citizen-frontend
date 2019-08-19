@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AddressDisplay from '../components/AddressDisplay';
 import AddressForm from '../components/AddressForm';
+import Loader  from '../components/Loader';
 
 class AddressMatchContainer extends React.Component {
     constructor(props){
@@ -51,7 +52,7 @@ class AddressMatchContainer extends React.Component {
             < Route path='/address-search' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderContainer()}
+                        {this.props.loader ? <div>Loading, please wait ...<Loader/></div> : this.renderContainer()}
                     </div>
                 )
             }}

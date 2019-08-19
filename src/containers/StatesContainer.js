@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStates } from '../actions'
 import StateTile from '../components/StateTile';
+import Loader  from '../components/Loader';
 import { Search } from 'semantic-ui-react'
 import _ from 'lodash'
 
@@ -43,7 +44,7 @@ class StatesContainer extends React.Component {
             < Route path='/states' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderStates()}
+                        {this.props.loader ? <div>Loading, please wait ...<Loader/></div> : this.renderStates()}
                     </div>
                 )
             }}

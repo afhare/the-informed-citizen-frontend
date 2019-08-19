@@ -1,4 +1,4 @@
-import {START_HOUSE_FETCH, START_SENATE_FETCH, FETCH_HOUSE_SUCCESS, FETCH_SENATE_SUCCESS, START_STATE_FETCH, FETCH_STATE_SUCCESS, START_SHOW_STATE_FETCH, FETCH_SHOW_STATE_SUCCESS, START_SHOW_HOUSE_REP_FETCH, FETCH_SHOW_HOUSE_REP_SUCCESS, START_SHOW_SENATOR_FETCH, FETCH_SHOW_SENATOR_SUCCESS, START_LOGIN_USER_FETCH, FETCH_LOGIN_USER_SUCCESS, LOGOUT, LOGOUT_SUCCESS, FETCH_VERIFY_USER_SUCCESS, START_VERIFY_USER_FETCH } from './types'
+import {START_HOUSE_FETCH, START_SENATE_FETCH, FETCH_HOUSE_SUCCESS, FETCH_SENATE_SUCCESS, START_STATE_FETCH, FETCH_STATE_SUCCESS, START_SHOW_STATE_FETCH, FETCH_SHOW_STATE_SUCCESS, START_SHOW_HOUSE_REP_FETCH, FETCH_SHOW_HOUSE_REP_SUCCESS, START_SHOW_SENATOR_FETCH, FETCH_SHOW_SENATOR_SUCCESS, START_LOGIN_USER_FETCH, FETCH_LOGIN_USER_SUCCESS, LOGOUT, LOGOUT_SUCCESS, FETCH_VERIFY_USER_SUCCESS, START_VERIFY_USER_FETCH, START_UPDATE_USER_FETCH, FETCH_UPDATE_USER_SUCCESS } from './types'
 
 export function fetchHouseReps(){
     return function (dispatch){
@@ -81,7 +81,7 @@ export function logout(history){
 
     return function (dispatch){
         dispatch({type: LOGOUT})
-        localStorage.removeItem('user')
+        console.log('logged out')
         dispatch({type: LOGOUT_SUCCESS})
         history.push('/')
     }
@@ -93,7 +93,7 @@ export function verifyLogin(token){
         headers: {
             'Content-Type': 'application/json',
             'Accepts': 'application/json',
-            'Authorization': token
+            'Authorization': `Bearer ${token}`
         }
     }
 
@@ -102,8 +102,34 @@ export function verifyLogin(token){
         fetch(`http://localhost:3001/profile`, reqObj).then(response => response.json()).then(data => {
             if (!data['error']){
                 localStorage.setItem('user', data.jwt)
+                console.log(data)
                 dispatch({type: FETCH_VERIFY_USER_SUCCESS, loggedInUser: data})
                 // history.push(`/profile`)
+            } else {
+                alert(data.error);
+            }}).catch(error => console.log(error))
+    }
+}
+
+export function updateProfile(address,token,history){
+    let updateObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accepts': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({user: {street_address: address.street_address, city: address.city, user_state: address.user_state, zipcode: address.zipcode}})
+    }
+
+    return function (dispatch){
+        dispatch({type: START_UPDATE_USER_FETCH})
+        fetch(`http://localhost:3001/update-profile`, updateObj).then(response => response.json()).then(data => {
+            if (!data['error']){
+                localStorage.setItem('user', data.jwt)
+                console.log(data)
+                dispatch({type: FETCH_UPDATE_USER_SUCCESS, loggedInUser: data})
+                history.push(`/profile`)
             } else {
                 alert(data.error);
             }}).catch(error => console.log(error))

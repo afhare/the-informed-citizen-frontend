@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../actions'
+import Loader  from '../components/Loader';
 
 
 class LoginContainer extends React.Component {
@@ -50,7 +51,7 @@ class LoginContainer extends React.Component {
             < Route path='/login' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderLogin()}
+                        {this.props.loader ? <div>Loading, please wait ...<Loader /></div> : this.renderLogin()}
                     </div>
                 )
             }}

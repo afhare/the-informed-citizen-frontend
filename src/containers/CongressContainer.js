@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchHouseReps, fetchSenators } from '../actions'
 import RepresentativeTile from '../components/RepresentativeTile';
 import SenatorTile from '../components/SenatorTile';
+import Loader  from '../components/Loader';
 import { Search } from 'semantic-ui-react';
 import _ from 'lodash'
 
@@ -144,7 +145,7 @@ class CongressContainer extends React.Component {
             < Route path='/' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderCongress()}
+                        {this.props.loader ? <div>Loading, please wait ...<Loader/></div> : this.renderCongress()}
                     </div>
                 )
             }}

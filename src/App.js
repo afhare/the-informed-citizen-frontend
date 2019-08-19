@@ -14,10 +14,14 @@ import UserShow from './components/UserShow';
 import AddressMatchContainer from './containers/AddressMatchContainer';
 import { connect } from 'react-redux'
 import { verifyLogin } from './actions'
+import UpdateProfile from './components/UpdateProfile';
 
 class App extends React.Component { 
   componentDidMount(){
     console.log('token', localStorage.getItem('user'), 'user', this.props.loggedInUser)
+    if ( localStorage.getItem('user') && !this.props.loggedInUser.username) {
+      this.props.verifyLogin(localStorage.getItem('user'))
+    }
   }
 
   render(){
@@ -43,6 +47,8 @@ class App extends React.Component {
             <Route exact path='/address-search' render={ routeProps => (<AddressMatchContainer {...routeProps}/>)}/>
 
             <Route exact path='/profile' render={ routeProps => (<UserShow {...routeProps} user={this.props.loggedInUser}/>)}/>
+
+            <Route exact path='/update-user-profile' render={ routeProps => (<UpdateProfile {...routeProps} user={this.props.loggedInUser}/>)}/>
           </Switch>
         </div>
       </BrowserRouter>

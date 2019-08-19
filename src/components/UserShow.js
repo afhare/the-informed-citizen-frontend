@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { Route, Switch, Link } from 'react-router-dom';
 import UserConnectedRepresentativeTile from './UserConnectedRepresentativeTile';
 import UserConnectedSenatorTile from './UserConnectedSenatorTile';
+import StateTile from './StateTile';
 import { verifyLogin } from '../actions'
+import Loader from './Loader';
 
 class UserShow extends React.Component {
 
@@ -15,7 +17,7 @@ class UserShow extends React.Component {
             case localStorage.getItem('user') != undefined && this.props.user ==[]:
                 this.props.verifyLogin(localStorage.getItem('user'))
                 return true
-            case (!localStorage.getItem('user') || localStorage.getItem('user')== undefined) && !this.props.user ==[]:
+            case (!localStorage.getItem('user') || localStorage.getItem('user')== undefined) && this.props.user ==[]:
                     return false
             case (!localStorage.getItem('user') || localStorage.getItem('user')== undefined) && this.props.user:
                 localStorage.setItem('user', this.props.user.jwt)
@@ -33,11 +35,26 @@ class UserShow extends React.Component {
     }
 
     displayRepresentative = () => {
-        return this.props.user.representatives.map(representative => <UserConnectedRepresentativeTile representative={representative}/>)
+        if (this.props.user.representatives[0]) {
+            return this.props.user.representatives.map(representative => <UserConnectedRepresentativeTile representative={representative}/>)
+        } else if (!this.props.user.representatives[0] || !this.props.user.representatives) {
+            return (
+                <>
+                <p> If you do not see your representative listed below,<br/>a list of all {this.props.user.state.abbreviation}'s representatives can be found <Link to={`/states/${this.props.user.state.id}`}>here</Link>.</p>
+                </>
+            )
+        }
     }
 
     displaySenators = () => {
-        return this.props.user.senators.map(senator => <UserConnectedSenatorTile senator={senator}/>)
+        if (this.props.user.senators[0]){
+            return this.props.user.senators.map(senator => <UserConnectedSenatorTile senator={senator}/>)
+        } else if (!this.props.user.senators[0] || !this.props.user.senators) {
+            return(<> 
+            <p> If you do not see your senators listed below,
+                <br/>a list of all {this.props.user.state.abbreviation}'s senators can be found <Link to={`/states/${this.props.user.state.id}`}>here</Link>.</p>
+            </>)
+        }
     }
 
     render(){
@@ -45,7 +62,10 @@ class UserShow extends React.Component {
             < Route path='/profile' render={ () => {
                 return(
                     <div>
-                        {this.checkLoggedIn() ? <div>Profile Loading, please wait ...</div> :
+                        {this.checkLoggedIn() ? 
+                            <div>Profile Loading, please wait ... 
+                            <Loader />
+                            </div> :
             <div className='user-card'>
                 <p>Name: {this.props.user.name}</p>
                 <p>Username: {this.props.user.username}</p>
@@ -54,23 +74,17 @@ class UserShow extends React.Component {
                     <h4>Street Address: </h4> <p>{this.props.user.street_address}</p>
                     <h4>City: </h4> <p>{this.props.user.city}</p>
                     <h4>Zipcode: </h4> <p>{this.props.user.zipcode}</p>
+                    {this.props.displayState ? <StateTile state={this.props.displayState} /> : <div>State details loading...</div>}
                 <p>Polling place: </p> {this.displayPollingPlace()}
                 </div>
                 <div className='user-congress-container'>
                     <h4>My Senators: </h4>
                         <div className='user-grid-container'>
-                            {this.props.user.senators.length > 0 ? this.displaySenators() : <> 
-            <p> If you do not see senators listed below,
-                <br/>a list of all {this.props.user.state.abbreviation}'s senators can be found <Link to={`/states/${this.props.user.state.id}`}>here</Link>.</p>
-            </>}
+                            {this.props.user.senators ? this.displaySenators() : null }
                         </div>
                     <h4>My Representative: </h4>
                         <div className='user-grid-container'>
-                        { this.props.user.representatives.length > 0 ? this.displayRepresentative() : 
-            <> 
-            <p> If you do not see a representative listed below,
-                <br/>a list of all {this.props.user.state.abbreviation}'s representatives can be found <Link to={`/states/${this.props.user.state.id}`}>here</Link>.</p>
-            </> }
+                        { this.props.user.representatives ? this.displayRepresentative() : null }
                         </div>
                 </div>
             </div>
@@ -85,7 +99,8 @@ class UserShow extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        user: state.loggedInUser
+        user: state.loggedInUser,
+        displayState : state.loggedInUser.state
     }
 }
 

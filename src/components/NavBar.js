@@ -9,12 +9,14 @@ class NavBar extends React.Component {
         return (
             <>
                 <Link to={`/profile`} className="nav-link"> Profile Page </Link>  ||
+                <Link to={`/update-user-profile`} className="nav-link"> Update Your Profile </Link>  ||
                 <a href='/' onClick={() => this.handleLogout()}>Log out</a>
             </>
         )
     }
 
     handleLogout = () => {
+        localStorage.removeItem('user')
         this.props.logout(this.props.history)
     }
     
