@@ -27,7 +27,11 @@ class NavBar extends React.Component {
                 <Link to={'/'} className="nav-link"> Home </Link>  ||  
                 <Link to={'/congress'} className="nav-link"> View Congressional Representatives </Link>  ||  
                 <Link to={'/states'} className="nav-link"> View States </Link>  ||
-                { this.props.loggedInUser.username ? this.renderShowLogout() : <Link to={'/login'} className="nav-link"> Login </Link>}   ||
+                { this.props.loggedInUser.username ? this.renderShowLogout() : 
+                    <>
+                        <Link to={'/login'} className="nav-link"> Login </Link>   ||
+                        <Link to={'/register'} className="nav-link"> Register/Create an Account </Link>  ||
+                    </> }
                 <Link to={'/address-search'} className="nav-link"> Find My Representatives </Link>
             </nav>
         )

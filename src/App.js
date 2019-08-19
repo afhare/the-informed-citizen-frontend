@@ -15,6 +15,8 @@ import AddressMatchContainer from './containers/AddressMatchContainer';
 import { connect } from 'react-redux'
 import { verifyLogin } from './actions'
 import UpdateProfile from './components/UpdateProfile';
+import UserMatchedRepresentative from './components/UserMatchedRepresentative';
+import RegisterContainer from './containers/RegisterContainer';
 
 class App extends React.Component { 
   componentDidMount(){
@@ -32,7 +34,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' component={Home}/>
 
-            <Route exact path='/login' render={(routeProps) => { return <LoginContainer {...routeProps} />}} />
+            <Route exact path='/login' render={(routeProps) => ( <LoginContainer {...routeProps} />)} />
 
             <Route exact path='/congress' render={ routeProps => ( <CongressContainer {...routeProps} /> )}/>
             
@@ -44,11 +46,14 @@ class App extends React.Component {
             
             <Route exact path='/senators/:senatorId' render={ (routeProps) => (<SenatorShow {...routeProps}/>)}/>
 
-            <Route exact path='/address-search' render={ routeProps => (<AddressMatchContainer {...routeProps}/>)}/>
+            <Route exact path='/address-search' render={ routeProps => (<><AddressMatchContainer {...routeProps}/> <UserMatchedRepresentative /></>)}/>
 
             <Route exact path='/profile' render={ routeProps => (<UserShow {...routeProps} user={this.props.loggedInUser}/>)}/>
 
             <Route exact path='/update-user-profile' render={ routeProps => (<UpdateProfile {...routeProps} user={this.props.loggedInUser}/>)}/>
+
+            <Route exact path='/register' render={ routeProps => (<RegisterContainer {...routeProps}/>)}/>
+
           </Switch>
         </div>
       </BrowserRouter>

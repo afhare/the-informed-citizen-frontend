@@ -1,4 +1,4 @@
-import {START_HOUSE_FETCH, START_SENATE_FETCH, FETCH_HOUSE_SUCCESS, FETCH_SENATE_SUCCESS, START_STATE_FETCH, FETCH_STATE_SUCCESS, START_SHOW_STATE_FETCH, FETCH_SHOW_STATE_SUCCESS, START_SHOW_HOUSE_REP_FETCH, FETCH_SHOW_HOUSE_REP_SUCCESS, START_SHOW_SENATOR_FETCH, FETCH_SHOW_SENATOR_SUCCESS, START_LOGIN_USER_FETCH, FETCH_LOGIN_USER_SUCCESS, LOGOUT, LOGOUT_SUCCESS, FETCH_VERIFY_USER_SUCCESS, START_VERIFY_USER_FETCH, START_UPDATE_USER_FETCH, FETCH_UPDATE_USER_SUCCESS } from './types'
+import {START_HOUSE_FETCH, START_SENATE_FETCH, FETCH_HOUSE_SUCCESS, FETCH_SENATE_SUCCESS, START_STATE_FETCH, FETCH_STATE_SUCCESS, START_SHOW_STATE_FETCH, FETCH_SHOW_STATE_SUCCESS, START_SHOW_HOUSE_REP_FETCH, FETCH_SHOW_HOUSE_REP_SUCCESS, START_SHOW_SENATOR_FETCH, FETCH_SHOW_SENATOR_SUCCESS, START_LOGIN_USER_FETCH, FETCH_LOGIN_USER_SUCCESS, LOGOUT, LOGOUT_SUCCESS, FETCH_VERIFY_USER_SUCCESS, START_VERIFY_USER_FETCH, START_UPDATE_USER_FETCH, FETCH_UPDATE_USER_SUCCESS, START_REGISTER_USER_FETCH, FETCH_REGISTER_USER_SUCCESS, START_DELETE_USER_FETCH, FETCH_DELETE_USER_SUCCESS} from './types'
 
 export function fetchHouseReps(){
     return function (dispatch){
@@ -104,7 +104,6 @@ export function verifyLogin(token){
                 localStorage.setItem('user', data.jwt)
                 console.log(data)
                 dispatch({type: FETCH_VERIFY_USER_SUCCESS, loggedInUser: data})
-                // history.push(`/profile`)
             } else {
                 alert(data.error);
             }}).catch(error => console.log(error))
@@ -130,6 +129,56 @@ export function updateProfile(address,token,history){
                 console.log(data)
                 dispatch({type: FETCH_UPDATE_USER_SUCCESS, loggedInUser: data})
                 history.push(`/profile`)
+            } else {
+                alert(data.error);
+            }}).catch(error => console.log(error))
+    }
+}
+
+export function register(userObj, history){
+    console.log(userObj)
+    let newObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accepts': 'application/json'
+        },
+        body: JSON.stringify(userObj)
+    }
+
+    return function (dispatch){
+        dispatch({type: START_REGISTER_USER_FETCH})
+        fetch(`http://localhost:3001/register`, newObj).then(response => response.json()).then(data => {
+            if (!data['error']){
+                localStorage.setItem('user', data.jwt)
+                console.log(data)
+                dispatch({type: FETCH_REGISTER_USER_SUCCESS, loggedInUser: data})
+                history.push(`/profile`)
+            } else {
+                alert(data.error);
+            }}).catch(error => console.log(error))
+    }
+}
+
+export function deleteUser(username, token, history){
+    let delObj = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accepts': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({user:{username}})
+    }
+
+    return function (dispatch){
+        dispatch({type: START_DELETE_USER_FETCH})
+        fetch(`http://localhost:3001/delete-user`, delObj).then(response => response.json()).then(data => {
+            if (!data['error']){
+                localStorage.removeItem('user')
+                dispatch({type: FETCH_DELETE_USER_SUCCESS, loggedInUser: []})
+                alert(data.message)
+                history.push(`/`)
             } else {
                 alert(data.error);
             }}).catch(error => console.log(error))

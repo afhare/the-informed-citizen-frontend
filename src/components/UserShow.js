@@ -6,12 +6,23 @@ import UserConnectedSenatorTile from './UserConnectedSenatorTile';
 import StateTile from './StateTile';
 import { verifyLogin } from '../actions'
 import Loader from './Loader';
+import DeleteUserConfirmation from './DeleteUserConfirmation';
 
 class UserShow extends React.Component {
-
+    constructor(props){
+        super(props)
+        this.state={
+            deleteView:false
+        }
+    }
     componentDidMount(){
         console.log(this.props.user)
     }
+
+    toggleDeleteView = () => {
+        this.setState({deleteView : !this.state.deleteView})
+    }
+
     checkLoggedIn = () => {
         switch (localStorage.getItem('user')){
             case localStorage.getItem('user') != undefined && this.props.user ==[]:
@@ -86,7 +97,10 @@ class UserShow extends React.Component {
                         <div className='user-grid-container'>
                         { this.props.user.representatives ? this.displayRepresentative() : null }
                         </div>
+                
                 </div>
+                {this.state.deleteView ? <DeleteUserConfirmation cancelClick={this.toggleDeleteView} history={this.props.history}/> : <button onClick={this.toggleDeleteView}>Delete my Account</button>}
+                
             </div>
         }
                     </div>
