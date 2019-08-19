@@ -1,4 +1,4 @@
-import {START_HOUSE_FETCH, START_SENATE_FETCH, FETCH_HOUSE_SUCCESS, FETCH_SENATE_SUCCESS, START_STATE_FETCH, FETCH_STATE_SUCCESS, START_SHOW_STATE_FETCH, FETCH_SHOW_STATE_SUCCESS, START_SHOW_HOUSE_REP_FETCH, FETCH_SHOW_HOUSE_REP_SUCCESS, START_SHOW_SENATOR_FETCH, FETCH_SHOW_SENATOR_SUCCESS, START_LOGIN_USER_FETCH, FETCH_LOGIN_USER_SUCCESS, LOGOUT, LOGOUT_SUCCESS, FETCH_VERIFY_USER_SUCCESS, START_VERIFY_USER_FETCH, START_UPDATE_USER_FETCH, FETCH_UPDATE_USER_SUCCESS, START_REGISTER_USER_FETCH, FETCH_REGISTER_USER_SUCCESS, START_DELETE_USER_FETCH, FETCH_DELETE_USER_SUCCESS} from './types'
+import {START_HOUSE_FETCH, START_SENATE_FETCH, FETCH_HOUSE_SUCCESS, FETCH_SENATE_SUCCESS, START_STATE_FETCH, FETCH_STATE_SUCCESS, START_SHOW_STATE_FETCH, FETCH_SHOW_STATE_SUCCESS, START_SHOW_HOUSE_REP_FETCH, FETCH_SHOW_HOUSE_REP_SUCCESS, START_SHOW_SENATOR_FETCH, FETCH_SHOW_SENATOR_SUCCESS, START_LOGIN_USER_FETCH, FETCH_LOGIN_USER_SUCCESS, LOGOUT, LOGOUT_SUCCESS, FETCH_VERIFY_USER_SUCCESS, START_VERIFY_USER_FETCH, START_UPDATE_USER_FETCH, FETCH_UPDATE_USER_SUCCESS, START_REGISTER_USER_FETCH, FETCH_REGISTER_USER_SUCCESS, START_DELETE_USER_FETCH, FETCH_DELETE_USER_SUCCESS, START_COMPARE_REP_FETCH, FETCH_COMPARE_REP_SUCCESS, START_COMPARE_SENATOR_FETCH, FETCH_COMPARE_SENATOR_SUCCESS, START_REMOVE_COMPARE_SENATOR, REMOVE_COMPARE_SENATOR_SUCCESS, START_REMOVE_COMPARE_REP, REMOVE_COMPARE_REP_SUCCESS} from './types'
 
 export function fetchHouseReps(){
     return function (dispatch){
@@ -182,5 +182,63 @@ export function deleteUser(username, token, history){
             } else {
                 alert(data.error);
             }}).catch(error => console.log(error))
+    }
+}
+
+export function fetchCompareHouseReps(id, token){
+    let compareHouseObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accepts': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({representative:{id}})
+    }
+    return function (dispatch){
+        dispatch({type: START_COMPARE_REP_FETCH})
+        fetch(`http://localhost:3001/representatives-compare`, compareHouseObj).then(response => response.json()).then(data => {
+            if (!data['error']){
+                dispatch({type: FETCH_COMPARE_REP_SUCCESS, compareHouseReps: data})
+            } else {
+                alert(data.error);
+            }}).catch(error => console.log(error))
+    }
+}
+
+export function fetchCompareSenators(id, token){
+    
+    let compareSenateObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accepts': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({senator:{id}})
+    }
+    return function (dispatch){
+        dispatch({type: START_COMPARE_SENATOR_FETCH})
+        fetch(`http://localhost:3001/senators-compare`, compareSenateObj).then(response => response.json()).then(data => {
+            if (!data['error']){
+                dispatch({type: FETCH_COMPARE_SENATOR_SUCCESS, compareSenators: data})
+            } else {
+                alert(data.error);
+            }}).catch(error => console.log(error))
+    }
+}
+
+
+export function removeCompareHouseReps(id){
+    return function (dispatch){
+        dispatch({type: START_REMOVE_COMPARE_REP})
+        dispatch({type: REMOVE_COMPARE_REP_SUCCESS, removeRepresentative: id})
+    }
+}
+
+export function removeCompareSenators(id){
+    return function (dispatch){
+        dispatch({type: START_REMOVE_COMPARE_SENATOR})
+        dispatch({type: REMOVE_COMPARE_SENATOR_SUCCESS, removeSenator: id})
     }
 }

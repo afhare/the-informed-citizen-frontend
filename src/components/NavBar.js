@@ -8,9 +8,10 @@ class NavBar extends React.Component {
     renderShowLogout = () => {
         return (
             <>
-                <Link to={`/profile`} className="nav-link"> Profile Page </Link>  ||
-                <Link to={`/update-user-profile`} className="nav-link"> Update Your Profile </Link>  ||
-                <a href='/' onClick={() => this.handleLogout()}>Log out</a>
+                <Link to={`/compare`} className="nav-link">Compare Members of Congress</Link>  ||
+                <Link to={`/profile`} className="nav-link">Profile Page</Link>  ||
+                <Link to={`/update-user-profile`} className="nav-link">Update Your Profile</Link>  ||
+                <a href='/' onClick={() => this.handleLogout()}>Log out</a>  ||
             </>
         )
     }
@@ -24,15 +25,15 @@ class NavBar extends React.Component {
         return(
             <nav className='navbar'>
                 <img className='logo' src={congress} alt='small Congress icon' />
-                <Link to={'/'} className="nav-link"> Home </Link>  ||  
-                <Link to={'/congress'} className="nav-link"> View Congressional Representatives </Link>  ||  
-                <Link to={'/states'} className="nav-link"> View States </Link>  ||
+                <Link to={'/'} className="nav-link">Home</Link>  ||  
+                <Link to={'/congress'} className="nav-link">View Congressional Representatives</Link>  ||  
+                <Link to={'/states'} className="nav-link">View States</Link>  ||
                 { this.props.loggedInUser.username ? this.renderShowLogout() : 
                     <>
-                        <Link to={'/login'} className="nav-link"> Login </Link>   ||
-                        <Link to={'/register'} className="nav-link"> Register/Create an Account </Link>  ||
+                        <Link to={'/login'} className="nav-link">Login</Link>   ||
+                        <Link to={'/register'} className="nav-link">Register/Create an Account</Link>  ||
                     </> }
-                <Link to={'/address-search'} className="nav-link"> Find My Representatives </Link>
+                <Link to={'/address-search'} className="nav-link">Find My Representatives</Link>
             </nav>
         )
     }
@@ -41,7 +42,9 @@ class NavBar extends React.Component {
 const mapStateToProps = (state) => {
     return{
         loggedInUser: state.loggedInUser,
-        loader: state.loader
+        loader: state.loader,
+        compareReps: state.compareRepresentatives,
+        compareSenators: state.compareSenators
     }
 }
 

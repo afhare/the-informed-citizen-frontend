@@ -17,6 +17,7 @@ import { verifyLogin } from './actions'
 import UpdateProfile from './components/UpdateProfile';
 import UserMatchedRepresentative from './components/UserMatchedRepresentative';
 import RegisterContainer from './containers/RegisterContainer';
+import CompareMOCContainer from './containers/CompareMOCContainer'
 
 class App extends React.Component { 
   componentDidMount(){
@@ -53,6 +54,8 @@ class App extends React.Component {
             <Route exact path='/update-user-profile' render={ routeProps => (<UpdateProfile {...routeProps} user={this.props.loggedInUser}/>)}/>
 
             <Route exact path='/register' render={ routeProps => (<RegisterContainer {...routeProps}/>)}/>
+            
+            <Route exact path='/compare' render={ routeProps => (<CompareMOCContainer {...routeProps}/>)}/>
 
           </Switch>
         </div>

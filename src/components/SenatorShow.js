@@ -2,8 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom';
 import StateTile from './StateTile'
+import { fetchSenators, fetchShowSenator, fetchCompareSenators} from '../actions'
 
 class SenatorShow extends React.Component {
+
+    componentDidMount(){
+        this.props.fetchShowSenator(this.props.match.params.senatorId)
+    }
+
+    renderSenateCommittees = () => {
+
+        return this.props.senator.senate_committees.map (committee => {
+            let subcommittees = committee.subcommittees.split(';')
+            return (
+            <>
+                <p>Committee: {committee.name}</p>
+                <p>Committee Chair</p>
+                <a href={`${committee.url}`}target={'_blank'} >Visit the {committee.name} website</a>
+                <p>Subcommittees:</p>
+                { subcommittees.map (subcomm => <p><span role='img'>🇺🇸</span> - {subcomm}</p>)}
+            </>
+        )})
+    }
+
+    handleAddComparison = (e) => {
+        e.preventDefault();
+        console.log('clicked')
+        this.props.fetchCompareSenators(this.props.senator.id, localStorage.getItem('user'))
+    }
+
     renderSenator = () => {
         return(
             <div className='senator-card'>
@@ -18,6 +45,8 @@ class SenatorShow extends React.Component {
                 <p>Next Election: {this.props.senator.next_election}</p>
                 <p>Term Length: 6 years</p>
                 {this.props.displayState ? <StateTile state={this.props.displayState} /> : <div>State details loading...</div>}
+                {this.props.senator.senate_committees ? this.renderSenateCommittees() : null}
+                <button onClick={(e)=> this.handleAddComparison(e)}>Compare {this.props.senator.name} with their colleagues</button>
             </div>
         )
     }
@@ -36,9 +65,24 @@ const mapStateToProps = (state) => {
     return {
         loader: state.loader,
         senator: state.showSenator,
+        senators: state.senators,
         displayState: state.showSenator.state,
         loggedInUser: state.loggedInUser
     }
 }
 
-export default connect(mapStateToProps, null)(SenatorShow)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchSenators: () => {
+            dispatch(fetchSenators())
+        },
+        fetchShowSenator: (id) => {
+            dispatch(fetchShowSenator(id))
+        },
+        fetchCompareSenators: (id, token) => {
+            dispatch(fetchCompareSenators(id, token))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SenatorShow)

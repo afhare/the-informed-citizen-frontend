@@ -7,7 +7,8 @@ import showState from './showState';
 import showHouseRep from './showHouseRep';
 import showSenator from './showSenator';
 import loggedInUser from './loggedInUser'
-
+import compareRepresentatives from './compareRepresentatives';
+import compareSenators from './compareSenators';
 
 export default combineReducers({
     senators,
@@ -17,5 +18,7 @@ export default combineReducers({
     showState,
     showHouseRep,
     showSenator,
-    loggedInUser
+    loggedInUser,
+    compareRepresentatives,
+    compareSenators
 })
