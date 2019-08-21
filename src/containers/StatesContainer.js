@@ -44,7 +44,7 @@ class StatesContainer extends React.Component {
             < Route path='/states' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...<Loader/></div> : this.renderStates()}
+                        {this.props.loader ? <Loader/> : this.renderStates()}
                     </div>
                 )
             }}

@@ -36,7 +36,7 @@ class AddressMatchContainer extends React.Component {
 
     renderContainer = () => {
         return (
-            <div>
+            <div className='address-match-container'>
                 <h3>Enter an address to find your representatives and senators:</h3>
                 <AddressForm submitForm={this.submitForm} />
                 <hr width='25%' />
@@ -52,7 +52,7 @@ class AddressMatchContainer extends React.Component {
             < Route path='/address-search' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...<Loader/></div> : this.renderContainer()}
+                        {this.props.loader ? <Loader/> : this.renderContainer()}
                     </div>
                 )
             }}

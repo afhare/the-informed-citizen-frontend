@@ -63,11 +63,11 @@ class CongressContainer extends React.Component {
 
         return (
             <div>
-                <h1>Congress</h1>
                 <div className='congress-search'>
-                    <h2>Search for a specific member of Congress: </h2>
-                    <p>Search by name (case-sensitive): </p><Search onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
-                    <p>Search by state: </p>
+                    <h2>Members of the 116th Congress</h2>
+                    <h3>Search for a specific member of Congress: </h3>
+                    <h4>Search by name (case-sensitive): </h4><Search onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
+                    <h4>Search by state: </h4>
                     <select onChange={(e) => this.handleSelectChange(e)}>
                         <option value='standard'>Select a state by name:</option>
                         <option value='state AL'>Alabama</option>
@@ -145,7 +145,7 @@ class CongressContainer extends React.Component {
             < Route path='/' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...<Loader/></div> : this.renderCongress()}
+                        {this.props.loader ? <Loader/> : this.renderCongress()}
                     </div>
                 )
             }}

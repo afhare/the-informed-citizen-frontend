@@ -24,13 +24,12 @@ class CompareRepTile extends React.Component {
 
     handleRemoveComparison = (e) => {
         e.preventDefault();
-        console.log('clicked')
         this.props.removeCompareHouseReps(this.props.representative.id)
     }
 
     render(){
         return(
-            <div className={`representative-tile ${this.props.representative.party}`}>
+            <div className={`representative-tile compare ${this.props.representative.party}`}>
                 <p>Name: {this.props.representative.name}</p>
                 <p>Party Affiliation: {this.props.representative.party}</p>
                 <p>State: {this.props.representative.state.name}</p>
@@ -40,7 +39,7 @@ class CompareRepTile extends React.Component {
                 <p>Next Election: {this.props.representative.next_election}</p>
                 <p>Term Length: 2 years</p>
                 <Link to={`/representatives/${this.props.representative.id}`} onClick={() => this.props.fetchShowHouseRep(this.props.representative.id)}> View More Details</Link>
-                <br/>
+                
                 <button onClick={(e)=> this.handleRemoveComparison(e)}>Remove This Comparison</button>
             </div>
         )

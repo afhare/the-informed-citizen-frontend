@@ -51,7 +51,7 @@ class LoginContainer extends React.Component {
             < Route path='/login' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...<Loader /></div> : this.renderLogin()}
+                        {this.props.loader ? <Loader /> : this.renderLogin()}
                     </div>
                 )
             }}

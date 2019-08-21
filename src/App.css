@@ -1,105 +1,424 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Abel&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+body {
+  width: 100%;
+  background-color: rgba(232, 226, 226, 0.6);
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   text-align: center;
+  background-image: url('./background-flag-image.jpg');
+  font-family: 'Abel', sans-serif;
+  margin: 1em;
 }
 
-.logo{
-  width: 2%;
-  height: 2%;
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 3px;
 }
 
-.congress-grid-container{
-  margin: 2em;
-  margin-left: 8em;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1em; 
-  height: 400px;
-  width: 85%;
-  padding: 0.8em;
-  overflow: scroll;
+.App{
+  margin: 1em;
+  padding: 0.5em;
+}
+
+a{
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover{
+  padding: 4px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* States Styling */
+.state-tile:hover{
+  transform: scale(1.05);
+  box-shadow: 2px 2px 10px 7px rgba(0,0,0,0.25), 
+    -2px -2px 10px 7px rgba(0,0,0,0.22);
+}
+
+.voter-positive{
+  color: green;
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+.voter-negative{
+  color: red;
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+.congress-connected-state-tile{
+  cursor: pointer;
+}
+
+.congress-search{
+  margin:1em;
+  padding: 0.5em;
+}
+.state-tile {
+  margin: 30px 7px;
+  width: 175px;
+  height: 120px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.4s;
+  border: 3px solid rgb(225, 223, 161);
+  background-color: rgb(238, 238, 238);
+  padding: 25px 7px;
 }
 
 .state-grid-container{
-  margin: 2em;
-  margin-left: 21em;
-  display: grid;
-  width: 1000px;
+  z-index: 0;
+  background-color: rgba(255, 255, 255, .6);
+  background-image: url('./marble.jpg');
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 6em;
+  padding: 0.8em;
+  overflow: scroll;
   height: 500px;
-  overflow:scroll;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2em; 
 }
 
-.user-grid-container{
+.congress-representation{
+  z-index: 0;
+  background-color: rgba(255, 255, 255, .6);
+  background-image: url('./marble.jpg');
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 3em;
+  padding: 0.8em;
+  overflow: scroll;
+  height: 515px;
+}
+
+.state-representative-tile, .state-senator-tile {
+  margin: 30px 7px;
+  width: 200px;
+  height: 200px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.4s;
+  border: 3px solid rgb(225, 223, 161);
+  padding: 5px;
+}
+
+.state-card{
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  margin-left: 23em;
+  padding: 2em;
+}
+/* States Styling Ends */
+
+/* Rep/Sen Styling */
+
+.congress-grid-container{
+  z-index: 0;
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 400px;
   margin: 2em;
-  display: grid;
-  grid-gap: 2em;
+  padding: 1em;
+  overflow: scroll;
 }
 
-.grid-item{
-  padding: 0.5em;
-  border: 3px solid gold;
-  width: 260px;
-  height: 175px;
+.representative-card, .senator-card{
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  margin-left: 23em;
+  width:50%;
+  padding: 2em;
 }
 
-.user-grid-item{ 
-  padding: 0.5em;
-  border: 3px solid gold;
+.representative-tile, .senator-tile {
+  margin: 30px 7px;
+  width: 200px;
+  height: 360px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.4s;
+  border: 3px solid rgb(225, 223, 161);
+  padding: 5px;
 }
+
 
 .D{
-  background-color: rgba(0, 0, 255, .3);
+  background-color: rgba(36, 32, 143, 0.4);
   transition: all 0.5s;
 }
 
 .D:hover{
-  background-color: rgba(0, 0, 255, .6);
+  background-color:rgba(36, 32, 143, .8);
   transform: scale(1.05);
+  box-shadow: 2px 2px 10px 7px rgba(0,0,0,0.25), 
+    -2px -2px 10px 7px rgba(0,0,0,0.22);
+  color: white;
+}
+
+.D:hover >a{
+  color: white;
+}
+
+.D > a {
+  color: black;
+}
+
+.R > a, .ID > a{
+  color: black;
 }
 
 .R{
-  background-color: rgba(255, 0, 0,.3);
+  background-color: rgba(255, 0, 0,.4);
   transition: all 0.5s;
 }
 
 .R:hover{
   background-color: rgba(255,0,0, .6);
   transform: scale(1.05);
+  box-shadow: 2px 2px 10px 7px rgba(0,0,0,0.25), 
+    -2px -2px 10px 7px rgba(0,0,0,0.22);
 }
 
-.voter-positive{
-  color: green
+.ID{
+  background-color: rgba(238, 238, 238, 0.4);
+  transition: all 0.5s;
 }
-.voter-negative{
-  color: red
+
+.ID:hover{
+  background-color: rgba(238, 238, 238, .6);
+  transform: scale(1.05);
+  box-shadow: 2px 2px 10px 7px rgba(0,0,0,0.25), 
+    -2px -2px 10px 7px rgba(0,0,0,0.22);
 }
+
+/* .party-icon-d{
+  background-color:rgb(255, 0, 0);
+}
+
+.party-icon-r{
+  background-color: rgb(36, 32, 143)
+} */
+
+.congress-comparisons{
+  z-index: 0;
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 350px;
+  margin: 3em;
+  padding: 2em;
+  overflow: scroll;
+}
+
+/* Rep/Sen Styling Ends */
+
+
+/* User Styling */
+.user-card{
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  margin-left: 23em;
+  width:50%;
+  padding: 2em;
+}
+.user-grid-container{
+  z-index: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-left: 28em;
+  width: 400px;
+  padding: 0.8em;
+  overflow: scroll;
+  height: 400px;
+}
+
+.user-grid-item{ 
+  margin: 30px auto;
+  width: 175px;
+  height: 175px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.4s;
+  border: 3px solid rgb(225, 223, 161);
+  padding: 20px;
+}
+/* User Styling Ends */
+
+
+/* Loading Styling */
 
 .loader {
   margin: 2em;
-  border: 7px solid rgba(0,0,255);
-  border-top: 7px solid rgba(255,0,0);
-  border-radius: 50%;
-  width: 2em;
-  height: 2em;
-  animation: spin 1s linear infinite;
+  width: 7em;
+  height: 7em;
+  -webkit-animation: vibrate-1 1s linear infinite both;
+	        animation: vibrate-1 1s linear infinite both;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@-webkit-keyframes vibrate-1 {
+  0% { -webkit-transform: translate(0);
+        transform: translate(0);
+  }
+  20% {-webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+  }
+  40% {-webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+  }
+  60% {-webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+  }
+  80% {-webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+  }
+  100% {-webkit-transform: translate(0);
+        transform: translate(0);
+  }
+}
+@keyframes vibrate-1 {
+  0% {-webkit-transform: translate(0);
+        transform: translate(0);
+  }
+  20% {-webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+  }
+  40% {-webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+  }
+  60% {-webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+  }
+  80% {-webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+  }
+  100% {-webkit-transform: translate(0);
+        transform: translate(0);
+  }
 }
 
-.grey-square{
-  border-radius: 15%;
-  background-color: grey;
-  height: 25px;
-  width:25px;
+/* Loading Styling Ends */
+
+
+/* NavBar Styling */
+ul.navbar{
+  display: flex;
+  width:90%;
+  height: 8em;
+  margin: 1em;
+  justify-content: center;
+  text-align: center;
+  background-image: url('./marble.jpg');
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
 }
 
-.red-square{
-  border-radius: 15%;
-  background-color: red;
-  height: 25px;
-  width:25px;
+ul.navbar > li, .dropdown-content{
+  list-style-type:none;
+  padding: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: rgb(31, 29, 92);
+  font-weight: 700;
+	margin: 2.3em;
 }
+
+.dropdown-content{
+  display:none;
+  margin: .5em;
+}
+
+.dropdown-content>li{
+  margin: .5em;
+}
+
+.logo{
+  width: 2%;
+  height: 2%;
+  margin: .5em;
+}
+
+.title{
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  display: inline;
+}
+/* NavBar Styling Ends */
+
+/* Registration and Login Styling and Home Page*/
+
+.login-form, .register-form, .home {
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  margin-left: 23em;
+  width:50%;
+  padding: 2em;
+}
+
+/* Registration and Login Styling Ends */
+
+/* Address Match Styling */
+.address-match-container{
+    background-image: url('./marble.jpg');
+    background-color: rgba(255, 255, 255, .6);
+    border: 7px outset rgb(225, 223, 161);
+    border-radius: 5px;
+    margin-left: 20em;
+    width:50%;
+    padding: 2em;
+}
+
+.match-address-form{
+  background-color: rgba(255, 255, 255, .3);
+  border: 7px outset rgb(225, 223, 161);
+  border-radius: 5px;
+  margin-left: 8em;
+  width:50%;
+  padding: 2em;
+}
+
+.address-match-congressperson {
+  margin: 30px 7px;
+  width: 180px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.4s;
+  border: 3px solid rgb(225, 223, 161);
+  padding: 10px;
+}
+
+.user-matched-congresspeople{
+  display:inline-flex;
+}
+/* Address Match Styling Ends */

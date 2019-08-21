@@ -6,7 +6,7 @@ import { fetchShowSenator } from '../actions'
 class StateConnectedSenatorTile extends React.Component {
     render(){
         return(
-            <div className={`grid-item ${this.props.senator.party}`}>
+            <div className={`state-senator-tile ${this.props.senator.party}`}>
                 <p>Name: {this.props.senator.name}</p>
                 <p>Party Affiliation: {this.props.senator.party}</p>
                 <p>{this.props.senator.chamber} : {this.props.senator.role}</p>

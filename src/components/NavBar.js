@@ -5,13 +5,40 @@ import congress  from '../congress.svg'
 import {logout, verifyLogin} from '../actions'
 
 class NavBar extends React.Component {
+    
+    constructor(props){
+        super(props)
+        this.state={
+            clicked:false
+        }
+    }
+
+    showDropDown = () => {
+        const compareMenu = document.getElementsByClassName('dropdown-content')[0]
+        const accountMenu = document.getElementsByClassName('dropdown-content')[1]
+        if (compareMenu.style.display == 'none'){
+            compareMenu.style.display = 'block'
+            accountMenu.style.display = 'block'
+            this.setState({clicked: true})
+        } else {
+            compareMenu.style.display = 'none'
+            accountMenu.style.display = 'none'
+            this.setState({clicked: false})
+        }
+    }
+    
     renderShowLogout = () => {
         return (
             <>
-                <Link to={`/compare`} className="nav-link">Compare Members of Congress</Link>  ||
-                <Link to={`/profile`} className="nav-link">Profile Page</Link>  ||
-                <Link to={`/update-user-profile`} className="nav-link">Update Your Profile</Link>  ||
-                <a href='/' onClick={() => this.handleLogout()}>Log out</a>  ||
+                <li className='dropdown' onClick={(e)=>this.showDropDown()}>{this.state.clicked ? 'Hide My Account Access' : 'Show My Account Access'}</li>
+                <div className='dropdown-content'>
+                    <li><Link to={`/profile`} className="nav-link">Profile Page</Link></li>
+                    <li><Link to={`/update-user-profile`} className="nav-link">Update Profile</Link></li>
+                </div>
+                <div className='dropdown-content'>
+                    <li><Link to={`/compare`} className="nav-link">View Congress Comparisons</Link></li>
+                    <li><a href='/' onClick={() => this.handleLogout()}>Log out</a></li>
+                </div>
             </>
         )
     }
@@ -22,19 +49,21 @@ class NavBar extends React.Component {
     }
     
     render(){
-        return(
-            <nav className='navbar'>
+        return(<>
                 <img className='logo' src={congress} alt='small Congress icon' />
-                <Link to={'/'} className="nav-link">Home</Link>  ||  
-                <Link to={'/congress'} className="nav-link">View Congressional Representatives</Link>  ||  
-                <Link to={'/states'} className="nav-link">View States</Link>  ||
+                <h1 className='title'>The Informed Citizen</h1>
+            <ul className='navbar'>
+                <li><Link to={'/'} className="nav-link">Home</Link></li>
+                <li><Link to={'/congress'} className="nav-link">View Congressional Representatives</Link></li>
+                <li><Link to={'/states'} className="nav-link">View States</Link></li>
                 { this.props.loggedInUser.username ? this.renderShowLogout() : 
                     <>
-                        <Link to={'/login'} className="nav-link">Login</Link>   ||
-                        <Link to={'/register'} className="nav-link">Register/Create an Account</Link>  ||
+                        <li><Link to={'/login'} className="nav-link">Login</Link></li>
+                        <li><Link to={'/register'} className="nav-link">Register/Create an Account</Link></li>
                     </> }
-                <Link to={'/address-search'} className="nav-link">Find My Representatives</Link>
-            </nav>
+                <li><Link to={'/address-search'} className="nav-link">Find My Representatives</Link></li>
+            </ul>
+            </>
         )
     }
 }

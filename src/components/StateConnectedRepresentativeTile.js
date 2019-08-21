@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {fetchShowHouseRep} from '../actions'
 
+
 class StateConnectedRepresentativeTile extends React.Component {
     render(){
         return(
-            <div className={`grid-item ${this.props.representative.party}`}>
+            <div className={`state-representative-tile ${this.props.representative.party}`}>
                 <p>Name: {this.props.representative.name}</p>
                 <p>Party Affiliation: {this.props.representative.party}</p>
                 <p>{this.props.representative.chamber} : {this.props.representative.role}</p>

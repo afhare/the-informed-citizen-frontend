@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom';
-import StateTile from './StateTile'
-import { fetchHouseReps, fetchShowHouseRep, fetchCompareHouseReps } from '../actions'
+import CongressConnectedStateTile from './CongressConnectedStateTile'
+import { fetchHouseReps, fetchShowHouseRep, fetchCompareHouseReps , removeCompareHouseReps} from '../actions'
 
 class RepresentativeShow extends React.Component {
     componentDidMount(){
@@ -42,6 +42,19 @@ class RepresentativeShow extends React.Component {
         e.preventDefault();
         this.props.fetchCompareHouseReps(this.props.representative.id, localStorage.getItem('user'))
     }
+
+    renderCompareBtn = () => {
+        if (this.props.compareRepresentatives.filter(rep => rep.id == this.props.representative.id).length > 0) {
+            return(<button onClick={(e)=> this.handleRemoveComparison(e)}>Remove This Comparison</button>)
+        } else {
+            return (<button className='compare-btn' onClick={(e)=> this.handleAddComparison(e)}>Compare {this.props.representative.name} with their colleagues</button>)
+        }
+    }
+
+    handleRemoveComparison = (e) => {
+        e.preventDefault();
+        this.props.removeCompareHouseReps(this.props.representative.id)
+    }
     
     renderRepresentative = () => {
         return(
@@ -50,17 +63,17 @@ class RepresentativeShow extends React.Component {
                 <p>Party Affiliation: {this.props.representative.party}</p>
                 <p>Chamber of Congress:{this.props.representative.chamber}</p>
                 <p>Role: {this.props.representative.role}</p>
-                <hr width='35%'/>
+                <hr width='15%'/>
+                {this.props.displayState ? <CongressConnectedStateTile state={this.props.displayState} /> : <div>State details loading...</div>}
                 <p>District: {this.props.representative.district}</p>
                 <p>Twitter Handle: <a href={`https://twitter.com/${this.props.representative.twitter_id}`} target={'_blank'}>@{this.props.representative.twitter_id}</a></p>
                 <p>Facebook: <a href={`https://www.facebook.com/${this.props.representative.facebook_account}`} target={'_blank'}>{this.props.representative.facebook_account}</a></p>
                 <p>Gender: {this.props.representative.gender}</p>
                 <p>Next Election: {this.props.representative.next_election}</p>
                 <p>Term Length: 2 years</p>
-                {this.props.displayState ? <StateTile state={this.props.displayState} /> : <div>State details loading...</div>}
                 {this.props.representative.house_committees ? this.renderHouseCommittees() : null}
                 {this.props.representative.joint_committees ? this.renderJointCommittees() : null}
-                <button onClick={(e)=> this.handleAddComparison(e)}>Compare {this.props.representative.name} with their colleagues</button>
+                {this.props.loggedInUser.username ? this.renderCompareBtn() : null }
             </div>
         )
     }
@@ -80,7 +93,8 @@ const mapStateToProps = (state) => {
         representative: state.showHouseRep,
         representatives: state.representatives,
         displayState: state.showHouseRep.state,
-        loggedInUser: state.loggedInUser
+        loggedInUser: state.loggedInUser,
+        compareRepresentatives: state.compareRepresentatives
     }
 }
 
@@ -94,6 +108,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         fetchCompareHouseReps: (id, token) => {
             dispatch(fetchCompareHouseReps(id, token))
+        },
+        removeCompareHouseReps: (id) => {
+            dispatch(removeCompareHouseReps(id))
         }
     }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Link } from 'react-router-dom';
 import UserConnectedRepresentativeTile from './UserConnectedRepresentativeTile';
 import UserConnectedSenatorTile from './UserConnectedSenatorTile';
-import StateTile from './StateTile';
+import CongressConnectedStateTile from './CongressConnectedStateTile';
 import { verifyLogin } from '../actions'
 import Loader from './Loader';
 import DeleteUserConfirmation from './DeleteUserConfirmation';
@@ -40,11 +40,6 @@ class UserShow extends React.Component {
         }
     }
 
-    displayPollingPlace = () => {
-        // fetch call to google API
-        return ( <p>Not there yet!</p>)
-    }
-
     displayRepresentative = () => {
         if (this.props.user.representatives[0]) {
             return this.props.user.representatives.map(representative => <UserConnectedRepresentativeTile representative={representative}/>)
@@ -78,26 +73,20 @@ class UserShow extends React.Component {
                             <Loader />
                             </div> :
             <div className='user-card'>
-                <p>Name: {this.props.user.name}</p>
-                <p>Username: {this.props.user.username}</p>
+                <h3>{this.props.user.username}'s Homepage</h3>
+                <h3>Welcome, {this.props.user.name}!</h3>
                 <hr width='35%'/>
                 <div>
                     <h4>Street Address: </h4> <p>{this.props.user.street_address}</p>
                     <h4>City: </h4> <p>{this.props.user.city}</p>
+                    {this.props.displayState ? <CongressConnectedStateTile state={this.props.displayState} /> : <div>State details loading...</div>}
                     <h4>Zipcode: </h4> <p>{this.props.user.zipcode}</p>
-                    {this.props.displayState ? <StateTile state={this.props.displayState} /> : <div>State details loading...</div>}
-                <p>Polling place: </p> {this.displayPollingPlace()}
                 </div>
                 <div className='user-congress-container'>
                     <h4>My Senators: </h4>
-                        <div className='user-grid-container'>
                             {this.props.user.senators ? this.displaySenators() : null }
-                        </div>
                     <h4>My Representative: </h4>
-                        <div className='user-grid-container'>
                         { this.props.user.representatives ? this.displayRepresentative() : null }
-                        </div>
-                
                 </div>
                 {this.state.deleteView ? <DeleteUserConfirmation cancelClick={this.toggleDeleteView} history={this.props.history}/> : <button onClick={this.toggleDeleteView}>Delete my Account</button>}
                 

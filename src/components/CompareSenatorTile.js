@@ -21,7 +21,7 @@ class CompareSenatorTile extends React.Component {
 
     render(){
         return(
-            <div className={`senator-tile ${this.props.senator.party}`}>
+            <div className={`senator-tile compare ${this.props.senator.party}`}>
                 <p>Name: {this.props.senator.name}</p>
                 <p>Party Affiliation: {this.props.senator.party}</p>
                 <p>State: {this.props.senator.state.name}</p>

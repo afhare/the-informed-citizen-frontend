@@ -37,8 +37,7 @@ class AddressForm extends React.Component {
     
     render(){
         return(
-            <form onSubmit={(e) => this.handleSubmit(e)}>
-                <br/>
+            <form className='match-address-form' onSubmit={(e) => this.handleSubmit(e)}>
                 <label>Street Address: </label>
                     <input type='text' name='street_address' onChange={(e)=> this.handleInputChange(e)} value={this.state.street_address} placeholder='Ex: 123 Main Street'/>
                     <br />

@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom';
-import StateTile from './StateTile'
-import { fetchSenators, fetchShowSenator, fetchCompareSenators} from '../actions'
+import CongressConnectedStateTile from './CongressConnectedStateTile'
+import { fetchSenators, fetchShowSenator, fetchCompareSenators, removeCompareSenators} from '../actions'
+import Loader from './Loader';
 
 class SenatorShow extends React.Component {
 
@@ -25,28 +26,41 @@ class SenatorShow extends React.Component {
         )})
     }
 
+    renderCompareBtn = () => {
+        if (this.props.compareSenators.filter(sen => sen.id == this.props.senator.id).length > 0) {
+            return(<button onClick={(e)=> this.handleRemoveComparison(e)}>Remove This Comparison</button>)
+        } else {
+            return (<button className='compare-btn' onClick={(e)=> this.handleAddComparison(e)}>Compare {this.props.representative.name} with their colleagues</button>)
+        }
+    }
+
     handleAddComparison = (e) => {
         e.preventDefault();
-        console.log('clicked')
         this.props.fetchCompareSenators(this.props.senator.id, localStorage.getItem('user'))
+    }
+
+
+    handleRemoveComparison = (e) => {
+        e.preventDefault();
+        this.props.removeCompareSenators(this.props.senator.id)
     }
 
     renderSenator = () => {
         return(
             <div className='senator-card'>
-                <p>Name: {this.props.senator.name}</p>
-                <p>Party Affiliation: {this.props.senator.party}</p>
+                <h3>{this.props.senator.name}</h3>
+                <p>Party Affiliation:</p> <span>{this.props.senator.party}</span>
                 <p>Chamber of Congress:{this.props.senator.chamber}</p>
                 <p>Role: {this.props.senator.role}</p>
                 <hr width='35%'/>
+                {this.props.displayState ? <CongressConnectedStateTile state={this.props.displayState} /> : <div>State details loading...</div>}
                 <p>Twitter Handle: <a href={`https://twitter.com/${this.props.senator.twitter_id}`} target={'_blank'}>@{this.props.senator.twitter_id}</a></p>
                 <p>Facebook: <a href={`https://www.facebook.com/${this.props.senator.facebook_account}`} target={'_blank'}>{this.props.senator.facebook_account}</a></p>
                 <p>Gender: {this.props.senator.gender}</p>
                 <p>Next Election: {this.props.senator.next_election}</p>
                 <p>Term Length: 6 years</p>
-                {this.props.displayState ? <StateTile state={this.props.displayState} /> : <div>State details loading...</div>}
                 {this.props.senator.senate_committees ? this.renderSenateCommittees() : null}
-                <button onClick={(e)=> this.handleAddComparison(e)}>Compare {this.props.senator.name} with their colleagues</button>
+                {this.props.loggedInUser.username ? this.renderCompareBtn() : null }
             </div>
         )
     }
@@ -55,7 +69,7 @@ class SenatorShow extends React.Component {
         return(
             <Switch>
                <Route path='/senators/:senatorID'>
-                    {this.props.loader ? <div>Loading, please wait ...</div> : this.renderSenator()}
+                    {this.props.loader ? <Loader/> : this.renderSenator()}
                </Route>
            </Switch>
         )
@@ -67,7 +81,8 @@ const mapStateToProps = (state) => {
         senator: state.showSenator,
         senators: state.senators,
         displayState: state.showSenator.state,
-        loggedInUser: state.loggedInUser
+        loggedInUser: state.loggedInUser,
+        compareSenators: state.compareSenators
     }
 }
 
@@ -81,6 +96,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         fetchCompareSenators: (id, token) => {
             dispatch(fetchCompareSenators(id, token))
+        },
+        removeCompareSenators: (id) => {
+            dispatch(removeCompareSenators(id))
         }
     }
 }

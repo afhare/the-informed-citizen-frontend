@@ -41,8 +41,11 @@ class RegisterContainer extends React.Component {
     }
 
     renderRegister = () => {
+        const quotes =['Let us never forget that government is ourselves and not an alien power over us. The ultimate rulers of our democracy are not a President and senators and congressmen and government officials, but the voters of this country. -Franklin D. Roosevelt', 'Patriotism is supporting your country all the time, and your government when it deserves it. -Mark Twain', 'We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.']
         return (
-            <div className='login-form'>
+            <div className='register-form'>
+                <h3>Create an account on The Informed Citizen</h3>
+                <p>{quotes[Math.floor(Math.random()*quotes.length)]}</p>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
                     <label>Username: </label> 
                         <input type="text" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)} placeholder="Enter username here"/>
@@ -76,7 +79,7 @@ class RegisterContainer extends React.Component {
             < Route path='/register' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...<Loader /></div> : this.renderRegister()}
+                        {this.props.loader ? <Loader /> : this.renderRegister()}
                     </div>
                 )
             }}

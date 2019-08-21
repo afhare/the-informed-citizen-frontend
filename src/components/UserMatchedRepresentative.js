@@ -23,7 +23,7 @@ class UserMatchedRepresentative extends React.Component {
 
     renderMatchedReps = () => {
         return (
-            <div className={this.props.representative.party[0]}>
+            <div className={`address-match-congressperson ${this.props.representative.party[0]}`}>
                 <p>{this.positionOfMOC()} {this.props.representative.name}</p>
                 <p>Phone: {this.props.representative.phones}</p>
                 {this.props.matchedRepresentative ? this.renderConnectedLink() : null}

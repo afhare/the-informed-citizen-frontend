@@ -90,7 +90,7 @@ class AddressDisplay extends React.Component {
     
     render(){
         return(
-            <div>
+            <div className='matched-congress-container'>
                 <p>As provided by Google's Civic Information API: </p>
                 {this.props.displayAddress.submitted_form ? this.addressFormat() : <p>Upon submitting the form above, your corresponding senators and representatives will display below.</p>}
             </div>

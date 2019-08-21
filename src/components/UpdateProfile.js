@@ -62,7 +62,7 @@ class UpdateProfile extends React.Component {
                 return(
                     <div>
                         {this.checkLoggedIn() ? <div>Update Profile Page Loading, please wait ...</div> :
-            <div className='user-card'>
+            <div className='update-user-card'>
                 <p>Name: {this.props.user.name}</p>
                 <p>Username: {this.props.user.username}</p>
                 <p>Current Address: <br/>{this.props.user.street_address}<br/> {this.props.user.city}{this.props.user.displayState ? <>,{this.props.user.displayState.abbreviation}</> : null} <br/> {this.props.user.zipcode} </p>
