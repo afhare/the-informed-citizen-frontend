@@ -1,6 +1,6 @@
 import {START_STATE_FETCH, FETCH_STATE_SUCCESS} from '../actions/types'
 
-export default function senators(state=[], action){
+export default function states(state=[], action){
     switch (action.type){
         case START_STATE_FETCH:
             return state

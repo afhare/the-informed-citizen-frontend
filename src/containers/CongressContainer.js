@@ -2,10 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchHouseReps, fetchSenators } from '../actions'
-import SenatorShow from '../components/SenatorShow';
-import RepresentativeShow from '../components/RepresentativeShow';
 import RepresentativeTile from '../components/RepresentativeTile';
 import SenatorTile from '../components/SenatorTile';
+import Loader  from '../components/Loader';
 import { Search } from 'semantic-ui-react';
 import _ from 'lodash'
 
@@ -64,11 +63,11 @@ class CongressContainer extends React.Component {
 
         return (
             <div>
-                <h1>Congress</h1>
                 <div className='congress-search'>
+                    <h1 className='title'>Members of the 116th Congress</h1>
                     <h2>Search for a specific member of Congress: </h2>
-                    <p>Search by name (case-sensitive): </p><Search onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
-                    <p>Search by state: </p>
+                    <h3>Search by name (case-sensitive): </h3><Search onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
+                    <h3>Search by state: </h3>
                     <select onChange={(e) => this.handleSelectChange(e)}>
                         <option value='standard'>Select a state by name:</option>
                         <option value='state AL'>Alabama</option>
@@ -122,7 +121,7 @@ class CongressContainer extends React.Component {
                         <option value='state WV'>West Virginia</option>
                         <option value='state WI'>Wisconsin</option>
                         <option value='state WY'>Wyoming</option>
-                        <option value='standard'>Select a US Territory</option>
+                        <option value='standard'> - Select a US Territory Below- </option>
                         <option value='state PR'>Puerto Rico</option>
                         <option value='state GU'>Guam</option>
                         <option value='state AS'>American Samoa</option>
@@ -130,11 +129,15 @@ class CongressContainer extends React.Component {
                         <option value='state VI'>Virgin Islands</option>
                     </select>
                 </div>
+                <br/>
                 <hr width='25%' />
-                <h2>House of Representatives</h2>
+                <br/>
+                <h1 className='title'>House of Representatives</h1>
                     <div className='congress-representatives congress-grid-container'>{representatives}</div>
+                <br/>
                 <hr width='25%' />
-                <h2>Senate</h2>
+                <br/>
+                <h1 className='title'>Senate</h1>
                     <div className='congress-senators congress-grid-container'>{senators}</div>
             </div>
         )
@@ -146,7 +149,7 @@ class CongressContainer extends React.Component {
             < Route path='/' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderCongress()}
+                        {this.props.loader ? <Loader/> : this.renderCongress()}
                     </div>
                 )
             }}
@@ -167,15 +170,12 @@ class CongressContainer extends React.Component {
     const mapDispatchToProps = (dispatch) => {
         return {
             fetchHouseReps: () => {
-                console.log('fetching house')
                 dispatch(fetchHouseReps())
             },
             fetchSenators: () => {
-                console.log('fetching senate')
                 dispatch(fetchSenators())
             }
         }
     }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CongressContainer)
-// export default CongressContainer

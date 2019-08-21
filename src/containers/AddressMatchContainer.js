@@ -3,12 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AddressDisplay from '../components/AddressDisplay';
 import AddressForm from '../components/AddressForm';
+import Loader  from '../components/Loader';
 
 class AddressMatchContainer extends React.Component {
-    componentDidMount(){
-        console.log(this.props)
-    };
-
     constructor(props){
         super(props)
         this.state={
@@ -39,10 +36,10 @@ class AddressMatchContainer extends React.Component {
 
     renderContainer = () => {
         return (
-            <div>
+            <div className='address-match-container'>
                 <h3>Enter an address to find your representatives and senators:</h3>
                 <AddressForm submitForm={this.submitForm} />
-                <hr width='25%' />
+                <br/>
                 <h3>Based on your address, your corresponding representatives and senators will display below:</h3>
                 <AddressDisplay displayAddress={this.state} handleGoogleAPIRequest={this.handleGoogleAPIRequest}/>
             </div>
@@ -55,7 +52,7 @@ class AddressMatchContainer extends React.Component {
             < Route path='/address-search' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderContainer()}
+                        {this.props.loader ? <Loader/> : this.renderContainer()}
                     </div>
                 )
             }}
@@ -64,17 +61,16 @@ class AddressMatchContainer extends React.Component {
         )
     }
 
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         loader: state.loader
-    //     }
-    // }
-
-    // const mapDispatchToProps = (dispatch) => {
-    //     return {
-    //     }
-    // }
 }
+    const mapStateToProps = (state) => {
+        return {
+            loader: state.loader
+        }
+    }
 
-// export default connect()(AddressMatchContainer)
-export default AddressMatchContainer
+    const mapDispatchToProps = (dispatch) => {
+        return {
+        }
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressMatchContainer)

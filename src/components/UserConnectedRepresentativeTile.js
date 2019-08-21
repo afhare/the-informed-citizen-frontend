@@ -30,4 +30,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserConnectedRepresentativeTile)
-// export default UserConnectedRepresentativeTile

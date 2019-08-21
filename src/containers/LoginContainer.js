@@ -1,7 +1,9 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Api from '../services/api'
+import { login } from '../actions'
+import Loader  from '../components/Loader';
+import flag  from '../true-color-flag.svg'
 
 
 class LoginContainer extends React.Component {
@@ -10,13 +12,10 @@ class LoginContainer extends React.Component {
         super(props)
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            error: false
         }
     }
-    
-    componentDidMount(){
-        console.log(this.props)
-    };
 
     handleChange = (e) => {
         this.setState({
@@ -25,17 +24,26 @@ class LoginContainer extends React.Component {
     }
 
     handleSubmit = (e) => {
+        let username = this.state.username
+        let password = this.state.password
         e.preventDefault();
+        this.props.login(username, password, this.props.history)
+        this.setState({
+            username: '',
+            password: ''
+        })
     }
 
     renderLogin = () => {
         return (
             <div className='login-form'>
+                <img className='register-logo' src={flag} alt='Dome of Congress Building' />
+                <h3>Login to your account on The Informed Citizen</h3>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
-                    <h3>Username: </h3> <input type="text" placeholder="Enter username here" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)}/>
-                    <h3>Password: </h3> <input type="password" placeholder="Enter password here" name="password" value={this.state.password} onChange={(e)=> this.handleChange(e)}/>
+                    <p className='login-input'>Username: <input type="text" placeholder="Enter username here" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)}/></p>
+                    <p className='login-input'>Password: <input type="password" placeholder="Enter password here" name="password" value={this.state.password} onChange={(e)=> this.handleChange(e)}/></p>
                     <br />
-                    <input type='submit'/>
+                    <input className='submit-btn' type='submit'/>
                 </form>
             </div>
         )
@@ -46,7 +54,7 @@ class LoginContainer extends React.Component {
             < Route path='/login' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderLogin()}
+                        {this.props.loader ? <Loader /> : this.renderLogin()}
                     </div>
                 )
             }}
@@ -54,18 +62,21 @@ class LoginContainer extends React.Component {
         </Switch>
         )
     }
-
-    // const mapStateToProps = (state) => {
-    //     return {
-    //         loader: state.loader
-    //     }
-    // }
-
-    // const mapDispatchToProps = (dispatch) => {
-    //     return {
-    //     }
-    // }
 }
 
-// export default connect()(LoginContainer)
-export default LoginContainer
+    const mapStateToProps = (state) => {
+        return {
+            loader: state.loader,
+            loggedInUser: state.loggedInUser
+        }
+    }
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            login: (username, password, history) => {
+                dispatch(login(username, password, history))
+            }
+        }
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

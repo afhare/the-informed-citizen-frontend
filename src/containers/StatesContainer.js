@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStates } from '../actions'
 import StateTile from '../components/StateTile';
+import Loader  from '../components/Loader';
 import { Search } from 'semantic-ui-react'
 import _ from 'lodash'
 
@@ -23,10 +24,10 @@ class StatesContainer extends React.Component {
         const states = this.state.searchTerm ? desiredStates.map(stateObj => <StateTile key={stateObj.id} state={stateObj}/>) : this.props.states.map(stateObj => <StateTile key={stateObj.id} state={stateObj}/>)
         return (
             <div>
-                <h1>United States of America and Territories</h1>
+                <h1 className='title'>United States of America and Territories</h1>
                 <div className='state-search'>
                     <h1>Search for a specific State:</h1>
-                    <Search onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
+                    <Search className='search-input' onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
                 </div>
                 <hr width='25%' />
                     <div className='states-and-territories state-grid-container'>{states}</div>
@@ -43,7 +44,7 @@ class StatesContainer extends React.Component {
             < Route path='/states' render={ () => {
                 return(
                     <div>
-                        {this.props.loader ? <div>Loading, please wait ...</div> : this.renderStates()}
+                        {this.props.loader ? <Loader/> : this.renderStates()}
                     </div>
                 )
             }}
@@ -69,4 +70,3 @@ class StatesContainer extends React.Component {
     }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatesContainer)
-// export default StatesContainer

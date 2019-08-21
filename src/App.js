@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import CongressContainer from './containers/CongressContainer';
 import StatesContainer from './containers/StatesContainer'
@@ -12,27 +12,20 @@ import Home from './components/Home';
 import LoginContainer from './containers/LoginContainer';
 import UserShow from './components/UserShow';
 import AddressMatchContainer from './containers/AddressMatchContainer';
-import API from './services/api'
+import { connect } from 'react-redux'
+import { verifyLogin } from './actions'
+import UpdateProfile from './components/UpdateProfile';
+import UserMatchedRepresentative from './components/UserMatchedRepresentative';
+import RegisterContainer from './containers/RegisterContainer';
+import CompareMOCContainer from './containers/CompareMOCContainer'
 
 class App extends React.Component { 
-
-  constructor(props){
-    super(props);
-    this.state={
-      senators:[],
-      representatives:[],
-      unitedStates:[],
-      users:[],
+  componentDidMount(){
+    console.log('token', localStorage.getItem('user'), 'user', this.props.loggedInUser)
+    if ( localStorage.getItem('user') && !this.props.loggedInUser.username) {
+      this.props.verifyLogin(localStorage.getItem('user'))
     }
   }
-  // componentDidMount(){
-  //   API.getHouse().then(data => {this.setState({representatives: data})})
-  //   API.getSenators().then(data => {this.setState({senators: data})})
-  //   API.getStates().then(data => {this.setState({unitedStates: data})})
-  //   API.getUsers().then(data => {this.setState({users: data})})
-  // }
-
-  //add a handle logout route to navbar
 
   render(){
     return (
@@ -42,7 +35,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' component={Home}/>
 
-            <Route exact path='/login' render={(routeProps) => { return <LoginContainer {...routeProps} />}} />
+            <Route exact path='/login' render={(routeProps) => ( <LoginContainer {...routeProps} />)} />
 
             <Route exact path='/congress' render={ routeProps => ( <CongressContainer {...routeProps} /> )}/>
             
@@ -54,20 +47,16 @@ class App extends React.Component {
             
             <Route exact path='/senators/:senatorId' render={ (routeProps) => (<SenatorShow {...routeProps}/>)}/>
 
-            <Route exact path='/address-search' render={ routeProps => (<AddressMatchContainer {...routeProps}/>)}/>
+            <Route exact path='/address-search' render={ routeProps => (<><AddressMatchContainer {...routeProps}/> <UserMatchedRepresentative /></>)}/>
 
-          <Route exact path='/users/:userId' 
-              render={
-                  (route) => {
-                    const id = route.match.params.userId
-                    const user = this.state.users.find(user => user.id == id)
-                      return (
-                          <div>
-                              <UserShow user={user}/>
-                          </div>
-                      )}
-              } 
-            />
+            <Route exact path='/profile' render={ routeProps => (<UserShow {...routeProps} user={this.props.loggedInUser}/>)}/>
+
+            <Route exact path='/update-user-profile' render={ routeProps => (<UpdateProfile {...routeProps} user={this.props.loggedInUser}/>)}/>
+
+            <Route exact path='/register' render={ routeProps => (<RegisterContainer {...routeProps}/>)}/>
+            
+            <Route exact path='/compare' render={ routeProps => (<CompareMOCContainer {...routeProps}/>)}/>
+
           </Switch>
         </div>
       </BrowserRouter>
@@ -76,4 +65,18 @@ class App extends React.Component {
 
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    loggedInUser: state.loggedInUser
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    verifyLogin: (token) => {
+      dispatch(verifyLogin(token))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

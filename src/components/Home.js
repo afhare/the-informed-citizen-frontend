@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link, Route, Switch } from 'react-router-dom'
 import congress from '../congress.svg'
 
 class Home extends React.Component {
     render(){
         return(
-            <div>
+            <div className='home'>
                 <img src={congress} alt='Congress icon' />
                 <h2>Welcome to The Digital Hill</h2>
                 <hr width='10%'/>
@@ -20,5 +19,4 @@ class Home extends React.Component {
     }
 }
 
-// export default connect()(Home)
-export default Home
+export default connect()(Home)

@@ -5,7 +5,8 @@ export default function representatives(state=[], action){
     case START_HOUSE_FETCH:
         return state
     case FETCH_HOUSE_SUCCESS:
-        return state.concat([...action.representatives])
+    const newState = [...action.representatives]
+    return newState
     default:
         return state
     }
