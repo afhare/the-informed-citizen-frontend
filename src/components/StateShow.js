@@ -5,6 +5,7 @@ import StateSenatorTile from './StateConnectedSenatorTile'
 import { fetchShowState } from '../actions'
 import { Route, Switch } from 'react-router-dom';
 import Loader from './Loader';
+import Map from './Map'
 
 
 class StateShow extends React.Component {
@@ -45,6 +46,9 @@ class StateShow extends React.Component {
         return(
             <div className='state-card'>
                 <h1>{this.props.showState.name}, {this.props.showState.abbreviation}</h1>
+                <div className='state-map-view'>
+                    <Map filter='state-view'/>
+                </div>
                 <hr width='25%'/>
                 <h2>Most recent election voter turnout:</h2> <p className={this.props.showState.voter_turnout > 50 ? 'voter-positive': 'voter-negative'}>{this.props.showState.voter_turnout}%</p>
                 { this.props.showState.twenty_nineteen_election ? this.display2019Election() : null }

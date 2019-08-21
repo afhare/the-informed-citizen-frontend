@@ -50,14 +50,34 @@ a:visited{
 
 /* States Styling */
 
-.state-search{
+.state-search {
     background-image: url('./marble.jpg');
     background-color: rgba(255, 255, 255, .6);
     border: 4px outset rgb(212,175,55);
     border-radius: 5px;
     margin-left: 18em;
+    margin-top: 2em;
     width:50%;
     padding: 2em;
+}
+
+.map-view{
+  display: none;
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 4px outset rgb(212,175,55);
+  border-radius: 5px;
+  width: 80%;
+  margin-left: 5em;
+  margin-top: 2em;
+  padding: 2em;
+}
+
+.map-input{
+  margin: 3px;
+}
+.map-input>input{
+  border: 4px outset rgb(212,175,55);
 }
 
 .prompt{
@@ -175,6 +195,11 @@ select{
   margin-left: 5em;
   width: 80%;
   padding: 2em;
+}
+
+.state-map-view>.us-state-map{
+  height: 50%;
+  width: 50%;
 }
 /* States Styling Ends */
 
@@ -558,6 +583,14 @@ ul.nav-list > li, .dropdown-content{
 /* Address Match Styling Ends */
 
 /* Buttons Styling*/
+.tall-compare-btn {
+  margin: 5px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px outset rgb(212,175,55);
+  font-weight: 600;
+  font-size: 14pt;
+}
 .compare-btn {
   margin-top: 5px;
   background-color: white;
