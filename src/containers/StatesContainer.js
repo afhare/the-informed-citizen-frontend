@@ -6,6 +6,7 @@ import StateTile from '../components/StateTile';
 import Loader  from '../components/Loader';
 import { Search } from 'semantic-ui-react'
 import _ from 'lodash'
+import Map from '../components/Map'
 
 class StatesContainer extends React.Component {
     componentDidMount(){
@@ -15,8 +16,27 @@ class StatesContainer extends React.Component {
     constructor(props){
         super(props)
         this.state={
-            searchTerm: ''
+            searchTerm: '',
+            mapFilter: 'none',
+            showMap: false,
         }
+    }
+
+    updateMapFilter = (e) => {
+        e.preventDefault();
+        this.setState({mapFilter: e.target.value})
+    }
+
+    handleCompareButtonClick = (e) => {
+        e.preventDefault();
+        const map = document.getElementsByClassName('map-view')[0]
+        if (map.style.display == 'none'){
+            map.style.display = 'block'
+            this.setState({showMap: true})
+        } else {
+            map.style.display = 'none'
+            this.setState({clicked: false})
+        } 
     }
 
     renderStates = () => {
@@ -25,10 +45,29 @@ class StatesContainer extends React.Component {
         return (
             <div>
                 <h1 className='title'>United States of America and Territories</h1>
+                <br/>
+                <br/>
+                <button className='tall-compare-btn' onClick={(e)=> this.handleCompareButtonClick(e)}>{this.state.showMap ? 'Hide The Comparison Map' : 'Show The Comparison Map'}</button>
+                <div className='map-view'>
+                    <h2>United States of America Voting Data Visualization</h2>
+                    <Map filter={this.state.mapFilter}/>
+
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="none" onChange={(e)=>this.updateMapFilter(e)} />Standard Map : No Filter</h4>
+                    <br/>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-turnout" onChange={(e)=>this.updateMapFilter(e)} />2018 Voting Turnout Percentage</h4>
+                    <p>The voting percentage filter reflects on the range of voter turnout percentages in 2018.<br/> Higher voter percentages are darker; lower voting percentages are lighter.</p>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-rights-score" onChange={(e)=>this.updateMapFilter(e)}/>Voting Rights Score</h4>
+                    <p>The voting rights score filter reflects on the ease of access to voting, for example: <br/> whether a state requires photo ID, or allows same-day registration.<br/> States with lower barriers to voting are darker; states with higher barriers are lighter.</p>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender" onChange={(e)=>this.updateMapFilter(e)}/>Gender Representation: House and Senate: Blue/Red Scale</h4>
+                    <p>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</p>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender-yellow-scale" onChange={(e)=>this.updateMapFilter(e)}/>Gender Representation: House and Senate: Yellow/Teal Scale</h4>
+                    <p>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</p>
+                </div>
                 <div className='state-search'>
                     <h1>Search for a specific State:</h1>
                     <Search className='search-input' onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
                 </div>
+                <br />
                 <hr width='25%' />
                     <div className='states-and-territories state-grid-container'>{states}</div>
             </div>
