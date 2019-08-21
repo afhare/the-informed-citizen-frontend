@@ -63,25 +63,19 @@ class UpdateProfile extends React.Component {
                     <div>
                         {this.checkLoggedIn() ? <div>Update Profile Page Loading, please wait ...</div> :
             <div className='update-user-card'>
-                <p>Name: {this.props.user.name}</p>
-                <p>Username: {this.props.user.username}</p>
-                <p>Current Address: <br/>{this.props.user.street_address}<br/> {this.props.user.city}{this.props.user.displayState ? <>,{this.props.user.displayState.abbreviation}</> : null} <br/> {this.props.user.zipcode} </p>
+                <h3>Let's update your user profile, {this.props.user.name}!</h3>
+                <h5>Currently logged in as : <span id='uppercase'>{this.props.user.username}</span></h5>
+                <h6>Current Address: <br/>{this.props.user.street_address}<br/> {this.props.user.city}{this.props.user.displayState ? <>,{this.props.user.displayState.abbreviation}</> : null} <br/> {this.props.user.zipcode} </h6>
                 <hr width='35%'/>
                 <form onSubmit={(e) => this.handleUpdateAddressSubmit(e)}>
-                    <label>Update your stored address:</label>
-                    <br/>
-                    <label>Street Address: </label>
-                        <input type='text' name='street_address' onChange={(e)=> this.handleInputChange(e)} value={this.state.street_address} />
+                    <h3>Update your stored address:</h3>
+                    <p className='update-input'>Street Address: <input type='text' name='street_address' onChange={(e)=> this.handleInputChange(e)} value={this.state.street_address} placeholder={this.props.user.street_address}/></p>
+                    <p className='update-input'>City: <input type='text' name='city' onChange={(e)=> this.handleInputChange(e)} value={this.state.city} placeholder={this.props.user.city}/></p>
+                    <p className='update-input'>Two-Letter State Abbreviation:
+                        <input type='text' name='user_state' onChange={(e)=> this.handleInputChange(e)} value={this.state.user_state} placeholder={this.props.user.displayState ? this.props.user.displayState.abbreviation : 'Ex: NY, OH, CA'}/></p>
+                    <p className='update-input'>Zip Code: <input type='text' name='zipcode' onChange={(e)=> this.handleInputChange(e)} value={this.state.zipcode} placeholder={this.props.user.zipcode} /></p>
                         <br />
-                    <label>City: </label>
-                        <input type='text' name='city' onChange={(e)=> this.handleInputChange(e)} value={this.state.city} />
-                        <br />
-                    <label>Two-Letter State Abbreviation: </label>
-                        <input type='text' name='user_state' onChange={(e)=> this.handleInputChange(e)} value={this.state.user_state} />
-                        <br />
-                    <label>Zip Code: </label>
-                        <input type='text' name='zipcode' onChange={(e)=> this.handleInputChange(e)} value={this.state.zipcode} />
-                    <input type='submit' />
+                    <input className='submit-btn' type='submit' />
                 </form>
             </div>
         }

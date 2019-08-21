@@ -40,7 +40,7 @@ class CompareRepTile extends React.Component {
                 <p>Term Length: 2 years</p>
                 <Link to={`/representatives/${this.props.representative.id}`} onClick={() => this.props.fetchShowHouseRep(this.props.representative.id)}> View More Details</Link>
                 
-                <button onClick={(e)=> this.handleRemoveComparison(e)}>Remove This Comparison</button>
+                <button className='compare-btn' onClick={(e)=> this.handleRemoveComparison(e)}>Remove This Comparison</button>
             </div>
         )
     }

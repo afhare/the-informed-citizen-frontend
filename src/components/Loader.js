@@ -8,7 +8,7 @@ const Loader = () => {
 
 
     return  <>
-            <h3>Loading, please wait...</h3>
+            <h3>Content Loading, please wait...</h3>
             <img src={images[Math.floor(Math.random()*images.length)]} alt='American flag' className='loader'/>
             </>
 }

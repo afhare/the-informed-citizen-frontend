@@ -39,7 +39,7 @@ class AddressMatchContainer extends React.Component {
             <div className='address-match-container'>
                 <h3>Enter an address to find your representatives and senators:</h3>
                 <AddressForm submitForm={this.submitForm} />
-                <hr width='25%' />
+                <br/>
                 <h3>Based on your address, your corresponding representatives and senators will display below:</h3>
                 <AddressDisplay displayAddress={this.state} handleGoogleAPIRequest={this.handleGoogleAPIRequest}/>
             </div>

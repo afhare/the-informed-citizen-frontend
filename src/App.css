@@ -23,9 +23,17 @@ h1, h2, h3, h4, h5, h6{
   padding: 0.5em;
 }
 
+hr{
+  border: 2px outset rgb(212,175,55);
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
 a{
   font-weight: 700;
   text-decoration: none;
+  color: black;
 }
 
 a:hover{
@@ -36,7 +44,31 @@ a:hover{
   border-radius: 10px;
 }
 
+a:visited{
+  color: black;
+}
+
 /* States Styling */
+
+.state-search{
+    background-image: url('./marble.jpg');
+    background-color: rgba(255, 255, 255, .6);
+    border: 4px outset rgb(212,175,55);
+    border-radius: 5px;
+    margin-left: 18em;
+    width:50%;
+    padding: 2em;
+}
+
+.prompt{
+    font-weight: 500;
+    font-size: 14pt;
+    margin: 3px 3px 3px 7px;
+    padding: 3px;
+    border-radius: 10px;
+    border: 1px outset rgb(212,175,55);
+}
+
 .state-tile:hover{
   transform: scale(1.05);
   box-shadow: 2px 2px 10px 7px rgba(0,0,0,0.25), 
@@ -60,8 +92,23 @@ a:hover{
 }
 
 .congress-search{
-  margin:1em;
-  padding: 0.5em;
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 4px outset rgb(212,175,55);
+  border-radius: 5px;
+  margin-left: 18em;
+  width:50%;
+  padding: 2em;
+}
+
+select{
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 14pt;
+  margin: 3px 3px 3px 7px;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px outset rgb(212,175,55);
 }
 .state-tile {
   margin: 30px 7px;
@@ -70,21 +117,25 @@ a:hover{
   border-radius: 40px;
   cursor: pointer;
   transition: 0.4s;
-  border: 3px solid rgb(225, 223, 161);
+  border: 3px solid rgb(212,175,55);
   background-color: rgb(238, 238, 238);
   padding: 25px 7px;
+}
+
+.state-tile > h3 {
+  letter-spacing: 1px;
 }
 
 .state-grid-container{
   z-index: 0;
   background-color: rgba(255, 255, 255, .6);
   background-image: url('./marble.jpg');
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 6em;
+  margin: 3em 6em 6em 6em;
   padding: 0.8em;
   overflow: scroll;
   height: 500px;
@@ -94,7 +145,7 @@ a:hover{
   z-index: 0;
   background-color: rgba(255, 255, 255, .6);
   background-image: url('./marble.jpg');
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
@@ -112,19 +163,21 @@ a:hover{
   border-radius: 40px;
   cursor: pointer;
   transition: 0.4s;
-  border: 3px solid rgb(225, 223, 161);
+  border: 3px solid rgb(212,175,55);
   padding: 5px;
 }
 
 .state-card{
   background-image: url('./marble.jpg');
   background-color: rgba(255, 255, 255, .6);
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
-  margin-left: 23em;
+  margin-left: 5em;
+  width: 80%;
   padding: 2em;
 }
 /* States Styling Ends */
+
 
 /* Rep/Sen Styling */
 
@@ -132,7 +185,7 @@ a:hover{
   z-index: 0;
   background-image: url('./marble.jpg');
   background-color: rgba(255, 255, 255, .6);
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
@@ -146,7 +199,7 @@ a:hover{
 .representative-card, .senator-card{
   background-image: url('./marble.jpg');
   background-color: rgba(255, 255, 255, .6);
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
   margin-left: 23em;
   width:50%;
@@ -156,17 +209,17 @@ a:hover{
 .representative-tile, .senator-tile {
   margin: 30px 7px;
   width: 200px;
-  height: 360px;
+  height: 300px;
   border-radius: 40px;
   cursor: pointer;
   transition: 0.4s;
-  border: 3px solid rgb(225, 223, 161);
+  border: 3px solid rgb(212,175,55);
   padding: 5px;
 }
 
 
 .D{
-  background-color: rgba(36, 32, 143, 0.4);
+  background-color: rgba(36, 32, 143, 0.3);
   transition: all 0.5s;
 }
 
@@ -191,12 +244,13 @@ a:hover{
 }
 
 .R{
-  background-color: rgba(255, 0, 0,.4);
+  background-color: rgba(100, 19, 21,.3);
   transition: all 0.5s;
 }
 
 .R:hover{
-  background-color: rgba(255,0,0, .6);
+  background-color: rgba(100, 19, 21, .8);
+  color: white;
   transform: scale(1.05);
   box-shadow: 2px 2px 10px 7px rgba(0,0,0,0.25), 
     -2px -2px 10px 7px rgba(0,0,0,0.22);
@@ -214,19 +268,31 @@ a:hover{
     -2px -2px 10px 7px rgba(0,0,0,0.22);
 }
 
-/* .party-icon-d{
-  background-color:rgb(255, 0, 0);
+.party-icon{
+  height: 12%;
+  width: 25%;
+  border: 3px outset rgb(212,175,55);
+  border-radius: 15px;
+  background-color:white;
+  padding: 4px;
+  margin: 3px 0px -13px 0px
 }
 
-.party-icon-r{
-  background-color: rgb(36, 32, 143)
-} */
+.party{
+  height: 4%;
+  width: 12%;
+  border: 3px outset rgb(212,175,55);
+  border-radius: 15px;
+  background-color:white;
+  padding: 4px;
+  margin: 3px 0px -13px 0px
+}
 
 .congress-comparisons{
   z-index: 0;
   background-image: url('./marble.jpg');
   background-color: rgba(255, 255, 255, .6);
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
@@ -244,7 +310,7 @@ a:hover{
 .user-card{
   background-image: url('./marble.jpg');
   background-color: rgba(255, 255, 255, .6);
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
   margin-left: 23em;
   width:50%;
@@ -269,7 +335,7 @@ a:hover{
   border-radius: 40px;
   cursor: pointer;
   transition: 0.4s;
-  border: 3px solid rgb(225, 223, 161);
+  border: 3px solid rgb(212,175,55);
   padding: 20px;
 }
 /* User Styling Ends */
@@ -330,26 +396,35 @@ a:hover{
 
 
 /* NavBar Styling */
-ul.navbar{
-  display: flex;
-  width:90%;
-  height: 8em;
-  margin: 1em;
-  justify-content: center;
-  text-align: center;
+.navbar{
   background-image: url('./marble.jpg');
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
+  height: 9em;
+  margin: 1em;
 }
 
-ul.navbar > li, .dropdown-content{
+ul.nav-list{
+  display: flex;
+  width:90%;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: -24px;
+  margin-top: -9px;
+}
+
+
+
+ul.nav-list > li, .dropdown-content{
+  font-family: 'Oswald', sans-serif;
   list-style-type:none;
   padding: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   color: rgb(31, 29, 92);
   font-weight: 700;
-	margin: 2.3em;
+  font-size: 14pt;
+	margin: 2em;
 }
 
 .dropdown-content{
@@ -365,34 +440,80 @@ ul.navbar > li, .dropdown-content{
   width: 2%;
   height: 2%;
   margin: .5em;
+  box-shadow: 2px 2px 5px black;
+  padding: .3em;
+  border-radius: 10px;
 }
 
 .title{
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
   display: inline;
+  text-shadow:4px 4px 6px grey;
+}
+
+.micro-logo{
+  display: inline-flex;
+  justify-content: space-evenly;
+  margin-top: -61px;
 }
 /* NavBar Styling Ends */
 
 /* Registration and Login Styling and Home Page*/
-
-.login-form, .register-form, .home {
+.home{
   background-image: url('./marble.jpg');
   background-color: rgba(255, 255, 255, .6);
-  border: 7px outset rgb(225, 223, 161);
+  border: 4px outset rgb(212,175,55);
+  border-radius: 5px;
+  margin-left: 20em;
+  width:50%;
+  padding: 2em;
+}
+
+.login-form, .register-form, .update-user-card{
+  background-image: url('./marble.jpg');
+  background-color: rgba(255, 255, 255, .6);
+  border: 4px outset rgb(212,175,55);
   border-radius: 5px;
   margin-left: 23em;
   width:50%;
   padding: 2em;
 }
 
+#uppercase{
+  text-transform: uppercase;
+}
+
+.register-logo{
+  width: 7%;
+  height: 7%;
+  margin: .5em;
+  box-shadow: 1px 1px 5px black;
+  border-radius: 10px;
+  padding: .3em;
+}
+
+.register-input, .login-input, .update-input{
+  font-weight: 700;
+  font-size: 14pt;
+}
+
+.register-input>input, .login-input>input, .update-input>input{
+  font-weight: 500;
+  font-size: 14pt;
+  margin: 3px 3px 3px 7px;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px outset rgb(212,175,55);
+  width: 275px;
+}
 /* Registration and Login Styling Ends */
 
 /* Address Match Styling */
 .address-match-container{
     background-image: url('./marble.jpg');
     background-color: rgba(255, 255, 255, .6);
-    border: 7px outset rgb(225, 223, 161);
+    border: 4px outset rgb(212,175,55);
     border-radius: 5px;
     margin-left: 20em;
     width:50%;
@@ -401,24 +522,73 @@ ul.navbar > li, .dropdown-content{
 
 .match-address-form{
   background-color: rgba(255, 255, 255, .3);
-  border: 7px outset rgb(225, 223, 161);
+  border: 3px outset rgb(212,175,55);
   border-radius: 5px;
-  margin-left: 8em;
-  width:50%;
+  margin-left: 3em;
+  width:75%;
   padding: 2em;
 }
 
 .address-match-congressperson {
-  margin: 30px 7px;
-  width: 180px;
+  margin: 10px;
+  width: 155px;
   border-radius: 40px;
   cursor: pointer;
   transition: 0.4s;
-  border: 3px solid rgb(225, 223, 161);
+  border: 3px solid rgb(212,175,55);
   padding: 10px;
 }
 
-.user-matched-congresspeople{
+#user-matched-congresspeople{
   display:inline-flex;
 }
+
+.match-input{
+  font-weight: 700;
+  font-size: 12pt;
+}
+.match-input>input{
+  font-weight: 500;
+  font-size: 14pt;
+  margin: 3px 3px 3px 7px;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px outset rgb(212,175,55);
+}
 /* Address Match Styling Ends */
+
+/* Buttons Styling*/
+.compare-btn {
+  margin-top: 5px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px outset rgb(212,175,55);
+  font-weight: 600;
+}
+.submit-btn, .delete-view-btn{
+  background-color: white;
+  border-radius: 10px;
+  border: 2px outset rgb(212,175,55);
+  font-size: 13pt;
+  font-weight: 700;
+}
+.delete-cancel-btn,.delete-confirm-btn{
+  font-size: 13pt;
+  border: 2px outset rgb(212,175,55);
+  padding: 5px;
+  border-radius: 10px;
+  margin: 7px;
+}
+
+.delete-cancel-btn{
+  background-color: rgb(147, 147, 147);
+  color: black;
+  font-weight: 700;
+}
+
+.delete-confirm-btn{
+  background-color: rgb(179, 1, 1);
+  color: white;
+  font-weight: 700;
+}
+/* Buttons Styling Ends */

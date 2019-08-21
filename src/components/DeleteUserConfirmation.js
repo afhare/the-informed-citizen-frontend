@@ -12,12 +12,11 @@ class DeleteUserConfirmation extends React.Component {
   render(){
     return (
       <div className="user-delete-window">
-          <label>Are you sure you want to delete your profile? This action cannot be undone.</label>
+          <h3>Are you sure you want to delete your profile? This action cannot be undone.</h3>
           <div>
-            <label>No - do not delete my profile.</label>
-              <button onClick={(e)=>{e.preventDefault(); this.props.cancelClick()}} className='delete-cancel-square'></button>
-            <label>I understand -- delete my profile.</label>
-              <button className='delete-confirm-square' onClick={(e) => this.handleDeleteClick(e)}> </button>
+              <button onClick={(e)=>{e.preventDefault(); this.props.cancelClick()}} className='delete-cancel-btn'>No - do not delete my profile.</button>
+              <button className='delete-confirm-btn' onClick={(e) => this.handleDeleteClick(e)}>Yes, I understand - delete my profile.</button>
+          <hr width='35%'/>
           </div>
       </div>
     )

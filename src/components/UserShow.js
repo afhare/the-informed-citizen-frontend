@@ -73,7 +73,7 @@ class UserShow extends React.Component {
                             <Loader />
                             </div> :
             <div className='user-card'>
-                <h3>{this.props.user.username}'s Homepage</h3>
+                <h2>{this.props.user.username}'s Homepage</h2>
                 <h3>Welcome, {this.props.user.name}!</h3>
                 <hr width='35%'/>
                 <div>
@@ -87,8 +87,10 @@ class UserShow extends React.Component {
                             {this.props.user.senators ? this.displaySenators() : null }
                     <h4>My Representative: </h4>
                         { this.props.user.representatives ? this.displayRepresentative() : null }
+                        <hr width='35%'/>
+                        <br/>
                 </div>
-                {this.state.deleteView ? <DeleteUserConfirmation cancelClick={this.toggleDeleteView} history={this.props.history}/> : <button onClick={this.toggleDeleteView}>Delete my Account</button>}
+                {this.state.deleteView ? <DeleteUserConfirmation cancelClick={this.toggleDeleteView} history={this.props.history}/> : <button className='delete-view-btn' onClick={this.toggleDeleteView}>Delete my Account</button>}
                 
             </div>
         }

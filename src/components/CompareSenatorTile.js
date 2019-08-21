@@ -31,7 +31,7 @@ class CompareSenatorTile extends React.Component {
                 <p>Term Length: 6 years</p>
                 <Link to={`/senators/${this.props.senator.id}`} onClick={() => this.props.fetchShowSenator(this.props.senator.id)}> View More Details</Link>
                 <br/>
-                <button onClick={(e)=> this.handleRemoveComparison(e)}>Remove This Comparison</button>
+                <button className='compare-btn' onClick={(e)=> this.handleRemoveComparison(e)}>Remove This Comparison</button>
             </div>
         )
     }

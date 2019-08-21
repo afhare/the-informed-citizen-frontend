@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../actions'
 import Loader  from '../components/Loader';
+import flag  from '../true-color-flag.svg'
 
 
 class LoginContainer extends React.Component {
@@ -36,11 +37,13 @@ class LoginContainer extends React.Component {
     renderLogin = () => {
         return (
             <div className='login-form'>
+                <img className='register-logo' src={flag} alt='Dome of Congress Building' />
+                <h3>Login to your account on The Informed Citizen</h3>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
-                    <h3>Username: </h3> <input type="text" placeholder="Enter username here" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)}/>
-                    <h3>Password: </h3> <input type="password" placeholder="Enter password here" name="password" value={this.state.password} onChange={(e)=> this.handleChange(e)}/>
+                    <p className='login-input'>Username: <input type="text" placeholder="Enter username here" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)}/></p>
+                    <p className='login-input'>Password: <input type="password" placeholder="Enter password here" name="password" value={this.state.password} onChange={(e)=> this.handleChange(e)}/></p>
                     <br />
-                    <input type='submit'/>
+                    <input className='submit-btn' type='submit'/>
                 </form>
             </div>
         )

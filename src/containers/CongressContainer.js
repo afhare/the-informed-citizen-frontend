@@ -64,10 +64,10 @@ class CongressContainer extends React.Component {
         return (
             <div>
                 <div className='congress-search'>
-                    <h2>Members of the 116th Congress</h2>
-                    <h3>Search for a specific member of Congress: </h3>
-                    <h4>Search by name (case-sensitive): </h4><Search onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
-                    <h4>Search by state: </h4>
+                    <h1 className='title'>Members of the 116th Congress</h1>
+                    <h2>Search for a specific member of Congress: </h2>
+                    <h3>Search by name (case-sensitive): </h3><Search onSearchChange={_.debounce(this.handleSearchChange, 500)} showNoResults={false} />
+                    <h3>Search by state: </h3>
                     <select onChange={(e) => this.handleSelectChange(e)}>
                         <option value='standard'>Select a state by name:</option>
                         <option value='state AL'>Alabama</option>
@@ -121,7 +121,7 @@ class CongressContainer extends React.Component {
                         <option value='state WV'>West Virginia</option>
                         <option value='state WI'>Wisconsin</option>
                         <option value='state WY'>Wyoming</option>
-                        <option value='standard'>Select a US Territory</option>
+                        <option value='standard'> - Select a US Territory Below- </option>
                         <option value='state PR'>Puerto Rico</option>
                         <option value='state GU'>Guam</option>
                         <option value='state AS'>American Samoa</option>
@@ -129,11 +129,15 @@ class CongressContainer extends React.Component {
                         <option value='state VI'>Virgin Islands</option>
                     </select>
                 </div>
+                <br/>
                 <hr width='25%' />
-                <h2>House of Representatives</h2>
+                <br/>
+                <h1 className='title'>House of Representatives</h1>
                     <div className='congress-representatives congress-grid-container'>{representatives}</div>
+                <br/>
                 <hr width='25%' />
-                <h2>Senate</h2>
+                <br/>
+                <h1 className='title'>Senate</h1>
                     <div className='congress-senators congress-grid-container'>{senators}</div>
             </div>
         )

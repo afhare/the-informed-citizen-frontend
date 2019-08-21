@@ -38,18 +38,11 @@ class AddressForm extends React.Component {
     render(){
         return(
             <form className='match-address-form' onSubmit={(e) => this.handleSubmit(e)}>
-                <label>Street Address: </label>
-                    <input type='text' name='street_address' onChange={(e)=> this.handleInputChange(e)} value={this.state.street_address} placeholder='Ex: 123 Main Street'/>
-                    <br />
-                <label>City: </label>
-                    <input type='text' name='city' onChange={(e)=> this.handleInputChange(e)} value={this.state.city} placeholder='Ex: Binghamton, Kansas City'/>
-                    <br />
-                <label>Two-Letter State Abbreviation: </label>
-                    <input type='text' name='state' onChange={(e)=> this.handleInputChange(e)} value={this.state.state} placeholder='Ex: AL, CA, OH'/>
-                    <br />
-                <label>Zip Code: </label>
-                    <input type='text' name='zipcode' onChange={(e)=> this.handleInputChange(e)} value={this.state.zipcode} placeholder='Ex: 12345, 45678'/>
-                <input type='submit' />
+                <p className='match-input'>Street Address:<input type='text' name='street_address' onChange={(e)=> this.handleInputChange(e)} value={this.state.street_address} placeholder='Ex: 123 Main Street'/></p>
+                <p className='match-input'>City:<input type='text' name='city' onChange={(e)=> this.handleInputChange(e)} value={this.state.city} placeholder='Ex: Binghamton, Kansas City'/></p>
+                <p className='match-input'>Two-Letter State Abbreviation: <input type='text' name='state' onChange={(e)=> this.handleInputChange(e)} value={this.state.state} placeholder='Ex: AL, CA, OH'/></p>
+                <p className='match-input'>Zip Code:<input type='text' name='zipcode' onChange={(e)=> this.handleInputChange(e)} value={this.state.zipcode} placeholder='Ex: 12345, 45678'/></p>
+                <input className='submit-btn' type='submit' />
             </form>
         )
     }
