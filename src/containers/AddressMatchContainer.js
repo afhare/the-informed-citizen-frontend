@@ -41,7 +41,7 @@ class AddressMatchContainer extends React.Component {
                 <AddressForm submitForm={this.submitForm} />
                 <br/>
                 <h3>Based on your address, your corresponding representatives and senators will display below:</h3>
-                <AddressDisplay displayAddress={this.state} handleGoogleAPIRequest={this.handleGoogleAPIRequest}/>
+                <AddressDisplay displayAddress={this.state}/>
             </div>
         )
     }
@@ -68,9 +68,4 @@ class AddressMatchContainer extends React.Component {
         }
     }
 
-    const mapDispatchToProps = (dispatch) => {
-        return {
-        }
-    }
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddressMatchContainer)
+export default connect(mapStateToProps, null)(AddressMatchContainer)

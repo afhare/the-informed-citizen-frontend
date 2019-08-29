@@ -81,7 +81,6 @@ export function logout(history){
 
     return function (dispatch){
         dispatch({type: LOGOUT})
-        console.log('logged out')
         dispatch({type: LOGOUT_SUCCESS})
         history.push('/')
     }
@@ -102,7 +101,6 @@ export function verifyLogin(token){
         fetch(`http://localhost:3001/profile`, reqObj).then(response => response.json()).then(data => {
             if (!data['error']){
                 localStorage.setItem('user', data.jwt)
-                console.log(data)
                 dispatch({type: FETCH_VERIFY_USER_SUCCESS, loggedInUser: data})
             } else {
                 alert(data.error);
@@ -110,7 +108,7 @@ export function verifyLogin(token){
     }
 }
 
-export function updateProfile(address,token,history){
+export function updateProfile(userObj,token,history){
     let updateObj = {
         method: 'POST',
         headers: {
@@ -118,7 +116,7 @@ export function updateProfile(address,token,history){
             'Accepts': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({user: {street_address: address.street_address, city: address.city, user_state: address.user_state, zipcode: address.zipcode}})
+        body: JSON.stringify({user: {name: userObj.name , user_state: userObj.user_state}})
     }
 
     return function (dispatch){
@@ -126,7 +124,6 @@ export function updateProfile(address,token,history){
         fetch(`http://localhost:3001/update-profile`, updateObj).then(response => response.json()).then(data => {
             if (!data['error']){
                 localStorage.setItem('user', data.jwt)
-                console.log(data)
                 dispatch({type: FETCH_UPDATE_USER_SUCCESS, loggedInUser: data})
                 history.push(`/profile`)
             } else {
@@ -136,7 +133,6 @@ export function updateProfile(address,token,history){
 }
 
 export function register(userObj, history){
-    console.log(userObj)
     let newObj = {
         method: 'POST',
         headers: {
@@ -151,7 +147,6 @@ export function register(userObj, history){
         fetch(`http://localhost:3001/register`, newObj).then(response => response.json()).then(data => {
             if (!data['error']){
                 localStorage.setItem('user', data.jwt)
-                console.log(data)
                 dispatch({type: FETCH_REGISTER_USER_SUCCESS, loggedInUser: data})
                 history.push(`/profile`)
             } else {

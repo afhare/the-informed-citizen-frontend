@@ -1,16 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserMatchedRepresentative from './UserMatchedRepresentative';
-import ReactDOM from 'react-dom';
 import { fetchHouseReps, fetchSenators } from '../actions'
-import reducer from '../reducers';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { BrowserRouter } from 'react-router-dom';
-
 
 class AddressDisplay extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            formattedRep0: null,
+            matchedRep0: null,
+            formattedRep1: null,
+            matchedRep1: null,
+            formattedRep2: null,
+            matchedRep2: null
+        }
+    }
 
     componentDidMount(){
         if (this.props.representatives.length === 0) {
@@ -36,37 +40,36 @@ class AddressDisplay extends React.Component {
         fetch(googleAPILink).then(response => response.json()).then(data => {
             let myRepresentatives = data.officials.slice(2,5)
             
-            let formattedReps = myRepresentatives.map(official => {
+            let formattedRepresentatives = myRepresentatives.map(official => {
                 return {name: official.name, party: official.party, phones: official.phones, urls: official.urls}
             })
-            this.displayRepresentatives(formattedReps)
+            this.displayRepresentatives(formattedRepresentatives)
         })
 
     }
 
     
     displayRepresentatives = (formattedRepresentatives) => {
-        let matchedRepOne = this.props.senators.find(rep => rep.name.includes(formattedRepresentatives[0].name.split(' ').slice(-1)[0]))
-        let matchedRepTwo = this.props.senators.find(rep => rep.name.includes(formattedRepresentatives[1].name.split(' ').slice(-1)[0]))
-        let matchedRepThree = this.props.representatives.find(rep => rep.name.includes(formattedRepresentatives[2].name.split(' ').slice(-1)[0]))
-
-        const composeEnhancers = 
-            typeof window === 'object' && 
-            window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose ;
-
-        const enhancer = composeEnhancers(applyMiddleware(thunk))
-
-        const store = createStore(reducer,  enhancer)
-
-        ReactDOM.render(   
-            <Provider store={store}>
-                <BrowserRouter>
-                    <UserMatchedRepresentative representative={formattedRepresentatives[0]} matchedRepresentative={matchedRepOne ? matchedRepOne : null}/>
-                    <UserMatchedRepresentative representative={formattedRepresentatives[1]} matchedRepresentative={matchedRepTwo ? matchedRepTwo : null}/>
-                    <UserMatchedRepresentative representative={formattedRepresentatives[2]} matchedRepresentative={matchedRepThree ? matchedRepThree : null}/>
-                </BrowserRouter>
-            </Provider>,
-        document.getElementById('user-matched-congresspeople'));
+        let matchedRepZero = this.props.senators.find(rep => {
+            if (rep.name.includes(formattedRepresentatives[0].name.split(' ').slice(-1)[0])){
+                return rep
+            }})
+        let matchedRepOne = this.props.senators.find(rep => {
+            if (rep.name.includes(formattedRepresentatives[1].name.split(' ').slice(-1)[0])){
+                return rep
+            }})
+        let matchedRepTwo = this.props.representatives.find(rep => {
+            if (rep.name.includes(formattedRepresentatives[2].name.split(' ').slice(-1)[0])){
+                return rep
+            }})
+        this.setState({
+            formattedRep0: formattedRepresentatives[0],
+            matchedRep0: matchedRepZero,
+            formattedRep1: formattedRepresentatives[1],
+            matchedRep1: matchedRepOne,
+            formattedRep2: formattedRepresentatives[2],
+            matchedRep2: matchedRepTwo
+        })
     }
 
     
@@ -82,7 +85,10 @@ class AddressDisplay extends React.Component {
                 <hr width='25%' />
                 <p>The senators and congressperson who represent me are: </p>
                 {this.handleGoogleAPIRequest()}
-                <div id='user-matched-congresspeople'>
+                <div className='user-matched-congresspeople'>
+                    <UserMatchedRepresentative representative={this.state.formattedRep0} matchedRepresentative={this.state.matchedRep0 ? this.state.matchedRep0 : null} state={this.props.displayAddress.state}/>
+                    <UserMatchedRepresentative representative={this.state.formattedRep1} matchedRepresentative={this.state.matchedRep1 ? this.state.matchedRep1 : null} state={this.props.displayAddress.state}/>
+                    <UserMatchedRepresentative representative={this.state.formattedRep2} matchedRepresentative={this.state.matchedRep2 ? this.state.matchedRep2 : null} state={this.props.displayAddress.state}/>
                 </div>
             </div>
         )

@@ -52,15 +52,15 @@ class StatesContainer extends React.Component {
                     <h2>United States of America Voting Data Visualization</h2>
                     <Map filter={this.state.mapFilter}/>
 
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="none" onChange={(e)=>this.updateMapFilter(e)} />Standard Map : No Filter</h4>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="none" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "none"}/>Standard Map : No Filter</h4>
                     <br/>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-turnout" onChange={(e)=>this.updateMapFilter(e)} />2018 Voting Turnout Percentage</h4>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-turnout" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "voting-turnout"}/>2018 Voting Turnout Percentage</h4>
                     <p>The voting percentage filter reflects on the range of voter turnout percentages in 2018.<br/> Higher voter percentages are darker; lower voting percentages are lighter.</p>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-rights-score" onChange={(e)=>this.updateMapFilter(e)}/>Voting Rights Score</h4>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-rights-score" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "voting-rights-score"}/>Voting Rights Score</h4>
                     <p>The voting rights score filter reflects on the ease of access to voting, for example: <br/> whether a state requires photo ID, or allows same-day registration.<br/> States with lower barriers to voting are darker; states with higher barriers are lighter.</p>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender" onChange={(e)=>this.updateMapFilter(e)}/>Gender Representation: House and Senate: Blue/Red Scale</h4>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "gender"}/>Gender Representation: House and Senate: Blue/Red Scale</h4>
                     <p>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</p>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender-yellow-scale" onChange={(e)=>this.updateMapFilter(e)}/>Gender Representation: House and Senate: Yellow/Teal Scale</h4>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender-yellow-scale" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "gender-yellow-scale"}/>Gender Representation: House and Senate: Yellow/Teal Scale</h4>
                     <p>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</p>
                 </div>
                 <div className='state-search'>

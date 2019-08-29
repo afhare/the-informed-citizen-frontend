@@ -46,7 +46,7 @@ class UserShow extends React.Component {
         } else if (!this.props.user.representatives[0] || !this.props.user.representatives) {
             return (
                 <>
-                <p> If you do not see your representative listed below,<br/>a list of all {this.props.user.state.abbreviation}'s representatives can be found <Link to={`/states/${this.props.user.state.id}`}>here</Link>.</p>
+                <p> Keep up to date with any member of the House of Representatives. To get started,<br/>a list of all {this.props.user.state.abbreviation}'s representatives can be found <Link to={`/states/${this.props.user.state.id}`}>here</Link>.</p>
                 </>
             )
         }
@@ -57,7 +57,7 @@ class UserShow extends React.Component {
             return this.props.user.senators.map(senator => <UserConnectedSenatorTile senator={senator}/>)
         } else if (!this.props.user.senators[0] || !this.props.user.senators) {
             return(<> 
-            <p> If you do not see your senators listed below,
+            <p> Keep up to date with any member of the Senate. To get started, 
                 <br/>a list of all {this.props.user.state.abbreviation}'s senators can be found <Link to={`/states/${this.props.user.state.id}`}>here</Link>.</p>
             </>)
         }
@@ -77,15 +77,12 @@ class UserShow extends React.Component {
                 <h3>Welcome, {this.props.user.name}!</h3>
                 <hr width='35%'/>
                 <div>
-                    <h4>Street Address: </h4> <p>{this.props.user.street_address}</p>
-                    <h4>City: </h4> <p>{this.props.user.city}</p>
                     {this.props.displayState ? <CongressConnectedStateTile state={this.props.displayState} /> : <div>State details loading...</div>}
-                    <h4>Zipcode: </h4> <p>{this.props.user.zipcode}</p>
                 </div>
                 <div className='user-congress-container'>
                     <h4>My Senators: </h4>
                             {this.props.user.senators ? this.displaySenators() : null }
-                    <h4>My Representative: </h4>
+                    <h4>My Representatives: </h4>
                         { this.props.user.representatives ? this.displayRepresentative() : null }
                         <hr width='35%'/>
                         <br/>

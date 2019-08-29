@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import CongressContainer from './containers/CongressContainer';
 import StatesContainer from './containers/StatesContainer'
 import SenatorShow from './components/SenatorShow';
