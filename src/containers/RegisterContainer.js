@@ -13,10 +13,7 @@ class RegisterContainer extends React.Component {
             username: '',
             password: '',
             name:'',
-            street_address:'',
-            city:'',
-            user_state:'',
-            zipcode:''
+            user_state:''
         }
     }
 
@@ -26,6 +23,10 @@ class RegisterContainer extends React.Component {
         })
     }
 
+    handleSelectChange = (e) => {
+        this.setState({user_state: e.target.value})
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.register({user: this.state}, this.props.history)
@@ -33,10 +34,7 @@ class RegisterContainer extends React.Component {
             username: '',
             password: '',
             name:'',
-            street_address:'',
-            city:'',
-            user_state:'',
-            zipcode:''
+            user_state:''
         })
     }
 
@@ -49,19 +47,70 @@ class RegisterContainer extends React.Component {
                 <p>{quotes[Math.floor(Math.random()*quotes.length)]}</p>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
                     <p className='register-input'>Username:  
-                        <input type="text" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)} placeholder="Enter username here"/></p>
+                        <input type="text" name="username" value={this.state.username} onChange={(e)=> this.handleChange(e)} placeholder="Enter username here" required /></p>
                     <p className='register-input'>Password:  
-                        <input type="password" name="password" value={this.state.password} onChange={(e)=> this.handleChange(e)} placeholder="Enter password here"/></p>
+                        <input type="password" name="password" value={this.state.password} onChange={(e)=> this.handleChange(e)} placeholder="Enter password here" required/></p>
                     <p className='register-input'>Name: 
-                        <input type="text" name="name" value={this.state.name} onChange={(e)=> this.handleChange(e)} placeholder="Enter your name here"/></p>
-                    <p className='register-input'>Street Address: 
-                        <input type='text' name='street_address' value={this.state.street_address} onChange={(e)=> this.handleChange(e)} placeholder='Ex: 123 Main Street' /></p>
-                    <p className='register-input'>City: 
-                        <input type='text' name='city' value={this.state.city} onChange={(e)=> this.handleChange(e)} placeholder='Ex: Binghamton, Kansas City' /></p>
-                    <p className='register-input'>Two-Letter State Abbreviation: 
-                        <input type='text' name='user_state' value={this.state.user_state} onChange={(e)=> this.handleChange(e)} placeholder='Ex: AL, CA, OH' /></p>
-                    <p className='register-input'>Zip Code: 
-                        <input type='text' name='zipcode' value={this.state.zipcode} onChange={(e)=> this.handleChange(e)} placeholder='Ex: 12345, 45678' /></p>
+                        <input type="text" name="name" value={this.state.name} onChange={(e)=> this.handleChange(e)} placeholder="Enter your name here" required /></p>
+                    <p className='register-input'>Select a US state or US territory by name:
+                        <select onChange={(e) => this.handleSelectChange(e)} required>
+                        <option value='AL'>Alabama</option>
+                        <option value='AK'>Alaska</option>
+                        <option value='AZ'>Arizona</option>
+                        <option value='AR'>Arkansas</option>
+                        <option value='CA'>California</option>
+                        <option value='CO'>Colorado</option>
+                        <option value='CT'>Connecticut</option>
+                        <option value='DE'>Delaware</option>
+                        <option value='DC'>District of Columbia</option>
+                        <option value='FL'>Florida</option>
+                        <option value='GA'>Georgia</option>
+                        <option value='HI'>Hawaii</option>
+                        <option value='ID'>Idaho</option>
+                        <option value='IL'>Illinois</option>
+                        <option value='IN'>Indiana</option>
+                        <option value='IA'>Iowa</option>
+                        <option value='KS'>Kansas</option>
+                        <option value='KY'>Kentucky</option>
+                        <option value='LA'>Louisiana</option>
+                        <option value='ME'>Maine</option>
+                        <option value='MD'>Maryland</option>
+                        <option value='MA'>Massachussetts</option>
+                        <option value='MI'>Michigan</option>
+                        <option value='MN'>Minnesota</option>
+                        <option value='MS'>Mississippi</option>
+                        <option value='MO'>Missouri</option>
+                        <option value='MT'>Montana</option>
+                        <option value='NE'>Nebraska</option>
+                        <option value='NV'>Nevada</option>
+                        <option value='NH'>New Hampshire</option>
+                        <option value='NJ'>New Jersey</option>
+                        <option value='NM'>New Mexico</option>
+                        <option value='NY'>New York</option>
+                        <option value='NC'>North Carolina</option>
+                        <option value='ND'>North Dakota</option>
+                        <option value='OH'>Ohio</option>
+                        <option value='OK'>Oklahoma</option>
+                        <option value='OR'>Oregon</option>
+                        <option value='PA'>Pennsylvania</option>
+                        <option value='RI'>Rhode Island</option>
+                        <option value='SC'>South Carolina</option>
+                        <option value='SD'>South Dakota</option>
+                        <option value='TN'>Tennessee</option>
+                        <option value='TX'>Texas</option>
+                        <option value='UT'>Utah</option>
+                        <option value='VT'>Vermont</option>
+                        <option value='VA'>Virginia</option>
+                        <option value='WA'>Washington</option>
+                        <option value='WV'>West Virginia</option>
+                        <option value='WI'>Wisconsin</option>
+                        <option value='WY'>Wyoming</option>
+                        <option value='PR'>Puerto Rico</option>
+                        <option value='GU'>Guam</option>
+                        <option value='AS'>American Samoa</option>
+                        <option value='MP'>Marianas Islands</option>
+                        <option value='VI'>Virgin Islands</option>
+                        </select></p>
                     <br />
                     <br />
                     <input className='submit-btn' type='submit'/>
