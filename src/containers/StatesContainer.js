@@ -52,16 +52,16 @@ class StatesContainer extends React.Component {
                     <h2>United States of America Voting Data Visualization</h2>
                     <Map filter={this.state.mapFilter}/>
 
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="none" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "none"}/>Standard Map : No Filter</h4>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="none" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'none'}/>Standard Map : No Filter</h4>
                     <br/>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-turnout" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "voting-turnout"}/>2018 Voting Turnout Percentage</h4>
-                    <p>The voting percentage filter reflects on the range of voter turnout percentages in 2018.<br/> Higher voter percentages are darker; lower voting percentages are lighter.</p>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-rights-score" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "voting-rights-score"}/>Voting Rights Score</h4>
-                    <p>The voting rights score filter reflects on the ease of access to voting, for example: <br/> whether a state requires photo ID, or allows same-day registration.<br/> States with lower barriers to voting are darker; states with higher barriers are lighter.</p>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "gender"}/>Gender Representation: House and Senate: Blue/Red Scale</h4>
-                    <p>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</p>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender-yellow-scale" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === "gender-yellow-scale"}/>Gender Representation: House and Senate: Yellow/Teal Scale</h4>
-                    <p>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</p>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-turnout" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'voting-turnout'}/>2018 Voting Turnout Percentage</h4>
+                    <h5>The voting percentage filter reflects on the range of voter turnout percentages in 2018.<br/> Higher voter percentages are darker; lower voting percentages are lighter.</h5>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-rights-score" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'voting-rights-score'}/>Voting Rights Score</h4>
+                    <h5>The voting rights score filter reflects on the ease of access to voting, for example: <br/> whether a state requires photo ID, or allows same-day registration.<br/> States with lower barriers to voting are darker; states with higher barriers are lighter.</h5>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'gender'}/>Gender Representation: House and Senate: Blue/Red Scale</h4>
+                    <h5>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</h5>
+                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender-black-white-scale" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'gender-black-white-scale'}/>Alternate Gender Representation: House and Senate: Black/White Scale</h4>
+                    <h5>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the black color scale, <br/>while states with predominantly female members of Congress are reflected on the white color scale.</h5>
                 </div>
                 <div className='state-search'>
                     <h1>Search for a specific State:</h1>
