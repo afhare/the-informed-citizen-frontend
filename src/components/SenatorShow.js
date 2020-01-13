@@ -119,10 +119,11 @@ class SenatorShow extends React.Component {
                 <hr width='25%'/>
                 <h4>Social Media Contact:</h4>
                 <p>Twitter Handle: <a href={`https://twitter.com/${this.props.senator.twitter_id}`} target={'_blank'}>@{this.props.senator.twitter_id}</a></p>
-                <p>Facebook: <a href={`https://www.facebook.com/${this.props.senator.facebook_account}`} target={'_blank'}>{this.props.senator.facebook_account}</a></p>
+                {this.props.senator.facebook_account ? <p>Facebook: <a href={`https://www.facebook.com/${this.props.senator.facebook_account}`} target={'_blank'}>{this.props.senator.facebook_account}</a></p> : null}
                 {this.props.senator.senate_committees ? this.renderSenateCommittees() : null}
                 {this.props.loggedInUser.username ? this.renderCompareBtn() : null }
                 {this.props.loggedInUser.username ? this.renderFaveBtn() : null }
+                <br/>
                 <br/>
                 <em>Details provided thanks to ProPublica's Congress API.</em>
             </div>

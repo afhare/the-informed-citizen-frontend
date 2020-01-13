@@ -61,7 +61,7 @@ class StatesContainer extends React.Component {
                         <br/>
                         <br/>
                         States with predominantly male members of Congress are reflected on the blue color scale (or black color scale),<br/> 
-                        while states with predominantly female members of Congress are reflected on the red color scale (or white color scale).</p>
+                        while states with predominantly female members of Congress are reflected on the red color scale (or white color scale). <br/> States with closer to 50-50 gender parity appear purple (or grey).</p>
                     </div>
                     <div className='map-radio-select'>
                         <p className='map-input'><u>Filter View Options</u></p>

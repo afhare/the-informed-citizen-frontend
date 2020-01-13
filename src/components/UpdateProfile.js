@@ -66,8 +66,6 @@ class UpdateProfile extends React.Component {
                 <hr width='35%'/>
                 <form onSubmit={(e) => this.handleUpdateAddressSubmit(e)}>
                     <h3>Let's update your user profile, {this.props.user.name}!</h3>
-                    <p className='update-input'>Name: 
-                        <input type="text" name="name" value={this.state.name} onChange={(e)=> this.handleChange(e)} placeholder="Enter your name here" required /></p>
                     <p className='update-input'>Select a US state or US territory by name:
                         <select onChange={(e) => this.handleSelectChange(e)} required>
                         <option value='AL'>Alabama</option>

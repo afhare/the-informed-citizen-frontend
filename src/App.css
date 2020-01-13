@@ -129,7 +129,7 @@ a:visited{
   font-weight: 700;
   letter-spacing: 4px;
 }
-.congress-connected-state-tile{
+.congress-connected-state-tile > a{
   cursor: pointer;
 }
 
@@ -344,7 +344,6 @@ select{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  height: 350px;
   margin: 3em;
   padding: 2em;
   overflow: scroll;
