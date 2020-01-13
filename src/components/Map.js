@@ -42,7 +42,7 @@ class Map extends Component {
   render() {
     return (
       <>
-        <USAMap customize={this.statesCustomConfig()} onClick={this.mapHandler} />
+        <USAMap customize={this.statesCustomConfig()} onClick={this.mapHandler} width={'700px'} height={'400px'} />
       </>
     );
   }

@@ -73,9 +73,31 @@ a:visited{
   padding: 2em;
 }
 
+.map-legend{
+  margin-left: 10px;
+  width: 32%;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 11pt;
+  float: right;
+  overflow: scroll;
+  height: 400px;
+}
+
+.map-radio-select{
+  clear: both;
+}
+
 .map-input{
   margin: 3px;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 14pt;
+  padding-top: 2px;
 }
+
 .map-input>input{
   border: 4px outset rgb(212,175,55);
 }

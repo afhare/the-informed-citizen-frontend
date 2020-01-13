@@ -113,6 +113,7 @@ class RepresentativeShow extends React.Component {
                 {this.props.representative.house_committees ? this.renderHouseCommittees() : null}
                 {this.props.representative.joint_committees ? this.renderJointCommittees() : null}
                 {this.props.loggedInUser.username ? this.renderCompareBtn() : null }
+                <br/>
                 <em>Details provided thanks to ProPublica's Congress API.</em>
             </div>
         )
