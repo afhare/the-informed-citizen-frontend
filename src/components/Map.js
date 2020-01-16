@@ -26,7 +26,7 @@ class Map extends Component {
             }
           case 'gender':
             return {
-                "AL": { fill: "#3333FF",},"AK": { fill: "#9999FF",},"AZ": { fill: "#9999FF",},"AR": { fill: "#515E90",},"CA": { fill: "#9999FF",},"CO": { fill: "#0000CC",},"CT": { fill: "#3333FF",},"DE": { fill: "#9999FF",},"DC": { fill: "#FF0000",},"FL": { fill: "#3333FF",},"GA": { fill: "#000066",},"HI": { fill: "#3333FF",},"ID": { fill: "#000066",},"IL": { fill: "#3333FF",},"IN": { fill: "#0000CC",},"IA": { fill: "#9933FF",},"KS": { fill: "#0000CC",},"KY": { fill: "#000066",},"LA": { fill: "#000066",},"ME": { fill: "#9933FF",},"MD": { fill: "#000066",},"MA": { fill: "#9999FF",},"MI": { fill: "#9999FF",},"MN": { fill: "#9933FF",},"MS": { fill: "#0000CC",},"MO": { fill: "#0000CC",},"MT": { fill: "#000066",},"NE": { fill: "#0000CC",},"NV": { fill: "#FF9999",},"NH": { fill: "#FF6666",},"NJ": { fill: "#0000CC",},"NM": { fill: "#9999FF",},"NY": { fill: "#9999FF",},"NC": { fill: "#0000CC",},"ND": { fill: "#000066",},"OH": { fill: "#0000CC",},"OK": { fill: "#0000CC",},"OR": { fill: "#0000CC",},"PA": { fill: "#0000CC",},"RI": { fill: "#000066",},"SC": { fill: "#000066",},"SD": { fill: "#000066",},"TN": { fill: "#000066",},"TX": { fill: "#0000CC",},"UT": { fill: "#000066",},"VT": { fill: "#000066",},"VA": { fill: "#3333FF",},"WA": { fill: "#FFCCCC",},"WV": { fill: "#3333FF",},"WI": { fill: "#0000CC",},"WY": { fill: "#9999FF",}
+                "AL": { fill: "#3333FF",},"AK": { fill: "#9999FF",},"AZ": { fill: "#9999FF",},"AR": { fill: "#000066",},"CA": { fill: "#9999FF",},"CO": { fill: "#0000CC",},"CT": { fill: "#3333FF",},"DE": { fill: "#9999FF",},"DC": { fill: "#FF0000",},"FL": { fill: "#3333FF",},"GA": { fill: "#000066",},"HI": { fill: "#3333FF",},"ID": { fill: "#000066",},"IL": { fill: "#3333FF",},"IN": { fill: "#0000CC",},"IA": { fill: "#9933FF",},"KS": { fill: "#0000CC",},"KY": { fill: "#000066",},"LA": { fill: "#000066",},"ME": { fill: "#9933FF",},"MD": { fill: "#000066",},"MA": { fill: "#9999FF",},"MI": { fill: "#9999FF",},"MN": { fill: "#9933FF",},"MS": { fill: "#0000CC",},"MO": { fill: "#0000CC",},"MT": { fill: "#000066",},"NE": { fill: "#0000CC",},"NV": { fill: "#FF9999",},"NH": { fill: "#FF6666",},"NJ": { fill: "#0000CC",},"NM": { fill: "#9999FF",},"NY": { fill: "#9999FF",},"NC": { fill: "#0000CC",},"ND": { fill: "#000066",},"OH": { fill: "#0000CC",},"OK": { fill: "#0000CC",},"OR": { fill: "#0000CC",},"PA": { fill: "#0000CC",},"RI": { fill: "#000066",},"SC": { fill: "#000066",},"SD": { fill: "#000066",},"TN": { fill: "#000066",},"TX": { fill: "#0000CC",},"UT": { fill: "#000066",},"VT": { fill: "#000066",},"VA": { fill: "#3333FF",},"WA": { fill: "#FFCCCC",},"WV": { fill: "#3333FF",},"WI": { fill: "#0000CC",},"WY": { fill: "#9999FF",}
             }
           case 'gender-black-white-scale':
             return {
@@ -42,7 +42,7 @@ class Map extends Component {
   render() {
     return (
       <>
-        <USAMap customize={this.statesCustomConfig()} onClick={this.mapHandler} />
+        <USAMap customize={this.statesCustomConfig()} onClick={this.mapHandler} width={'700px'} height={'400px'} />
       </>
     );
   }

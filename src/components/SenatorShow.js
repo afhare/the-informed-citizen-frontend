@@ -67,30 +67,30 @@ class SenatorShow extends React.Component {
     }
 
     renderFaveBtn = () => {
-        if (this.props.favoriteSenators.filter(sen => sen.id == this.props.senator.id).length > 0) {
-            return(
-                <>
-                <hr width='25%'/>
-                <br/>
-            <button className='favorite-btn' onClick={(e)=> this.handleRemoveFavorite(e)}>Remove From Favorites</button></>)
-        } else {
-            return (<>
-                <hr width='25%'/>
-                <br/>
-                <button className='favorite-btn' onClick={(e)=> this.handleAddFavorite(e)}>Add {this.props.senator.name} to Your Favorites</button></>)
-        }
+        // if (this.props.favoriteSenators.filter(sen => sen.id == this.props.senator.id).length > 0) {
+        //     return(
+        //         <>
+        //         <hr width='25%'/>
+        //         <br/>
+        //     <button className='favorite-btn' onClick={(e)=> this.handleRemoveFavorite(e)}>Remove From Favorites</button></>)
+        // } else {
+        //     return (<>
+        //         <hr width='25%'/>
+        //         <br/>
+        //         <button className='favorite-btn' onClick={(e)=> this.handleAddFavorite(e)}>Add {this.props.senator.name} to Your Favorites</button></>)
+        // }
     }
 
-    handleAddFavorite = (e) => {
-        e.preventDefault();
-        this.props.fetchFavoriteSenators(this.props.senator.id, localStorage.getItem('user'))
-    }
+    // handleAddFavorite = (e) => {
+    //     e.preventDefault();
+    //     this.props.fetchFavoriteSenators(this.props.senator.id, localStorage.getItem('user'))
+    // }
 
 
-    handleRemoveFavorite = (e) => {
-        e.preventDefault();
-        this.props.removeFavoriteSenators(this.props.senator.id)
-    }
+    // handleRemoveFavorite = (e) => {
+    //     e.preventDefault();
+    //     this.props.removeFavoriteSenators(this.props.senator.id)
+    // }
 
     handleAddComparison = (e) => {
         e.preventDefault();
@@ -119,10 +119,12 @@ class SenatorShow extends React.Component {
                 <hr width='25%'/>
                 <h4>Social Media Contact:</h4>
                 <p>Twitter Handle: <a href={`https://twitter.com/${this.props.senator.twitter_id}`} target={'_blank'}>@{this.props.senator.twitter_id}</a></p>
-                <p>Facebook: <a href={`https://www.facebook.com/${this.props.senator.facebook_account}`} target={'_blank'}>{this.props.senator.facebook_account}</a></p>
+                {this.props.senator.facebook_account ? <p>Facebook: <a href={`https://www.facebook.com/${this.props.senator.facebook_account}`} target={'_blank'}>{this.props.senator.facebook_account}</a></p> : null}
                 {this.props.senator.senate_committees ? this.renderSenateCommittees() : null}
                 {this.props.loggedInUser.username ? this.renderCompareBtn() : null }
                 {this.props.loggedInUser.username ? this.renderFaveBtn() : null }
+                <br/>
+                <br/>
                 <em>Details provided thanks to ProPublica's Congress API.</em>
             </div>
         )

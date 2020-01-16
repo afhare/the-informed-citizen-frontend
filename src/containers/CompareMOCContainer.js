@@ -13,9 +13,10 @@ class CompareMOCContainer extends React.Component {
         <div className='congress-compare'>
             <h2>Congress Comparisons</h2>
             <div className='congress-comparisons'>
-                {(this.props.compareSenators.length > 0 && this.props.compareRepresentatives.length > 0) ? null : <h3>Compare selected members of congress here. <br/><br/>Don't see any? <br /><br />Visit the "View Congressional Representatives" link above <br/>to find representatives and senators to compare.</h3> }
+                {(this.props.compareSenators.length > 0 || this.props.compareRepresentatives.length > 0) ? <>
                 {this.renderHouseComparisons()}
-                {this.renderSenateComparisons()}
+                {this.renderSenateComparisons()} </> : 
+                <h3>Compare selected members of congress here. <br/><br/>Don't see any? <br /><br />Visit the "View Congressional Representatives" link above <br/>to find representatives and senators to compare.</h3> }
             </div>
         </div>
         )

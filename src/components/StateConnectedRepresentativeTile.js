@@ -20,7 +20,7 @@ class StateConnectedRepresentativeTile extends React.Component {
             <div className={`state-representative-tile ${this.props.representative.party}`}>
                 <h4>{this.props.representative.name}</h4>
                 {this.renderParty()}
-                <h5>{this.props.representative.chamber} : {this.props.representative.role}</h5>
+                <h5> {this.props.representative.role}</h5>
                 <Link to={`/representatives/${this.props.representative.id}`} onClick={() => this.props.fetchShowHouseRep(this.props.representative.id)}> View {this.props.representative.name}'s Page</Link>
             </div>
         )

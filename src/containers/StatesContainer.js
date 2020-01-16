@@ -51,17 +51,47 @@ class StatesContainer extends React.Component {
                 <div className='map-view'>
                     <h2>United States of America Voting Data Visualization</h2>
                     <Map filter={this.state.mapFilter}/>
-
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="none" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'none'}/>Standard Map : No Filter</h4>
+                    <div className='map-legend'>
+                        <p><u>Filter Legend</u></p>
+                        <p>The <strong>voting percentage filter</strong> reflects on the range of voter turnout percentages in 2018. <br/> 
+                        Higher voter percentages are darker; lower voting percentages are lighter.</p>
+                        <p>The <strong>voting rights score filter</strong> reflects on the ease of access to voting, for example: whether a state requires photo ID, or allows same-day registration.<br/> 
+                        States with lower barriers to voting are darker; states with higher barriers are lighter.</p>
+                        <p>The <strong>gender representation filter </strong> reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/> There are two versions of this filter, in either a blue to red scale, or a black to white scale. 
+                        <br/>
+                        <br/>
+                        States with predominantly male members of Congress are reflected on the blue color scale (or black color scale),<br/> 
+                        while states with predominantly female members of Congress are reflected on the red color scale (or white color scale). <br/> States with closer to 50-50 gender parity appear purple (or grey).</p>
+                    </div>
+                    <div className='map-radio-select'>
+                        <p className='map-input'><u>Filter View Options</u></p>
+                        <p className='map-input'>
+                            <input type="radio" name="mapFilter" value="none" 
+                            checked={this.state.mapFilter === "none" ? true : false}
+                            onChange={(e)=>this.updateMapFilter(e)} />
+                            Standard Map : No Filter </p>
+                        <p className='map-input'>
+                            <input type="radio" name="mapFilter" value="voting-turnout"
+                            checked={this.state.mapFilter === "voting-turnout" ? true : false} 
+                            onChange={(e)=>this.updateMapFilter(e)} />
+                            2018 Voting Turnout Percentage</p>
+                        <p className='map-input'>
+                            <input type="radio" name="mapFilter" value="voting-rights-score" 
+                            checked={this.state.mapFilter === "voting-rights-score" ? true : false}
+                            onChange={(e)=>this.updateMapFilter(e)} />
+                            Voting Rights Score</p>
+                        <p className='map-input'>
+                            <input type="radio" name="mapFilter" value="gender" 
+                            checked={this.state.mapFilter === "gender" ? true : false}
+                            onChange={(e)=>this.updateMapFilter(e)} />
+                            Gender Representation in Congress: Blue/Red Scale</p>
+                        <p className='map-input'>
+                            <input type="radio" name="mapFilter" value="gender-black-white-scale" 
+                            checked={this.state.mapFilter === "gender-black-white-scale" ? true : false}
+                            onChange={(e)=>this.updateMapFilter(e)} />
+                            Gender Representation in Congress: Black/White Scale</p>
+                    </div>
                     <br/>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-turnout" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'voting-turnout'}/>2018 Voting Turnout Percentage</h4>
-                    <h5>The voting percentage filter reflects on the range of voter turnout percentages in 2018.<br/> Higher voter percentages are darker; lower voting percentages are lighter.</h5>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="voting-rights-score" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'voting-rights-score'}/>Voting Rights Score</h4>
-                    <h5>The voting rights score filter reflects on the ease of access to voting, for example: <br/> whether a state requires photo ID, or allows same-day registration.<br/> States with lower barriers to voting are darker; states with higher barriers are lighter.</h5>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'gender'}/>Gender Representation: House and Senate: Blue/Red Scale</h4>
-                    <h5>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the blue color scale, <br/>while states with predominantly female members of Congress are reflected on the red color scale.</h5>
-                    <h4 className='map-input'><input type="radio" name="mapFilter" value="gender-black-white-scale" onChange={(e)=>this.updateMapFilter(e)} checked={this.state.mapFilter === 'gender-black-white-scale'}/>Alternate Gender Representation: House and Senate: Black/White Scale</h4>
-                    <h5>The gender representation filter reflects the representation of the 116th Congress by state, on a spectrum of representation. <br/>States with predominantly male members of Congress are reflected on the black color scale, <br/>while states with predominantly female members of Congress are reflected on the white color scale.</h5>
                 </div>
                 <div className='state-search'>
                     <h1>Search for a specific State:</h1>

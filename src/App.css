@@ -73,9 +73,31 @@ a:visited{
   padding: 2em;
 }
 
+.map-legend{
+  margin-left: 10px;
+  width: 32%;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 11pt;
+  float: right;
+  overflow: scroll;
+  height: 400px;
+}
+
+.map-radio-select{
+  clear: both;
+}
+
 .map-input{
   margin: 3px;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 14pt;
+  padding-top: 2px;
 }
+
 .map-input>input{
   border: 4px outset rgb(212,175,55);
 }
@@ -107,7 +129,7 @@ a:visited{
   font-weight: 700;
   letter-spacing: 4px;
 }
-.congress-connected-state-tile{
+.congress-connected-state-tile > a{
   cursor: pointer;
 }
 
@@ -322,7 +344,6 @@ select{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  height: 350px;
   margin: 3em;
   padding: 2em;
   overflow: scroll;
